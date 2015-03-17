@@ -6,12 +6,12 @@
 This README document contains some basic information about the project.
 If you need to update this document, please change the header to reflect your name and the date.
 
-<h1>Project Description</h1>
+<h3>Project Description</h3>
 
 <p>A simple, working course registration system for COMP 3700.  The system will allow students to add/drop classes, view schedule, etc.</p>
 
 
-<h1>Group Members</h1>
+<h3>Group Members</h3>
 
 <ul>
 	<li>Sam Bartlett</li>
