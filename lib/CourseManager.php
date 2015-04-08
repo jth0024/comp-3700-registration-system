@@ -1,4 +1,5 @@
 <?php 
+include('config.php');
 include('Db_Controller.php');
 include('Course.php');
 /***************************************
@@ -21,7 +22,18 @@ Class CourseManager {
 	protected $db;
 
 	public function __construct(array $params) {
-		$db = new Db_Controller('host', 'username', 'password');
+		$db = new Db_Controller(HOST, USERNAME, PASSWORD);
+	}
+
+	public function getCourses() {
+		$courses = $db->get(COURSES_TABLE, '*');
+		return $courses;
+	}
+
+	public function addCourse(array $params) {
+		$newCourse = new Course($params);
+		$db->insert(COURSES_TABLE, array('name': $newCourse->getName(), 'instructor': $newCourse->getInstructor(), 
+			'students': $newCourse->getStudents()));
 	}
 
 	public function __destruct() {

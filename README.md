@@ -8,7 +8,7 @@ If you need to update this document, please change the header to reflect your na
 
 <h3>Project Description</h3>
 
-<p>A simple, working course registration system for COMP 3700.  The system will allow students to add/drop classes, view schedule, etc.</p>
+<p>A "simple", working course registration system for COMP 3700.  The system will allow students to add/drop classes, view schedule, etc.</p>
 
 
 <h3>Group Members</h3>

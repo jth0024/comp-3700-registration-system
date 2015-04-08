@@ -1,5 +1,5 @@
 <?php 
-
+include('config.php');
 /***************************************
 *
 * The Account represents users of the systems.
@@ -16,11 +16,33 @@
 
 Class Account {
 
-	public function __construct(array $params) {
+	protected $id;
+	protected $pwd; //Should be stored with sha1 hash.
+	protected $permissions;
 
+	public function __construct(array $params) {
+		$id = $params['id'];
+		$pwd = sha1($params['pwd']); //Whenever receiving password, encrypt it.
+		$permissions = NO_PERMISSIONS;
 	}
 
-	public function __destruct {
+	public function getId() {
+		return $id;
+	}
+
+	public function setId($newId) {
+		$id = $newId;
+	}
+
+	public function getPwd() {
+		return $pwd;
+	}
+
+	public function setPwd($newPwd) {
+		$pwd = sha1($params($newPwd));
+	}
+
+	public function __destruct() {
 
 	}
 }

@@ -17,11 +17,14 @@
 
 Class Course {
 
+	protected $name;
 	protected $roster[];
 	protected $instructor;
 
 	public function __construct(array $params) {
-
+		$name = $params['name'];
+		$roster = $params['roster'];
+		$instructor = $params['instructor'];
 	}
 
 	public function add_student($student) {
@@ -45,4 +48,13 @@ Class Course {
 	public function get_instructor() {
 		return $instructor;
 	}
+
+	public function set_name($newName) {
+		$name = $newName;
+	}
+
+	public function get_name() {
+		return $name;
+	}
+
 }

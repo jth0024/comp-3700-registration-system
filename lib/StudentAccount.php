@@ -18,5 +18,12 @@ include('Account.php');
 
 Class StudentAccount extends Account {
 
+	protected $schedule;
+
+	public function __construct(array $params) {
+		$id = $params['id'];
+		$pwd = sha1($params['pwd']); //Whenever receiving password, encrypt it.
+		$permissions = STUDENT_PERMISSIONS;
+	}
 }
 ?>

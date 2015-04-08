@@ -55,7 +55,7 @@ Class Db_Controller {
 		return 	$this->execute($query) ;
 	}
 
-	// Risky but useful
+	// Risky to keep public but useful
 	public function  delete($table,$where) {
 		$query="DELETE  FROM  `".$table."`   ";
 		$where="  WHERE  ".$where;

@@ -18,5 +18,11 @@ include('Account.php');
 
 Class AdministratorAccount extends Account {
 
+	public function __construct(array $params) {
+		$id = $params['id'];
+		$pwd = sha1($params['pwd']); //Whenever receiving password, encrypt it.
+		$permissions = ADMINISTRATOR_PERMISSIONS;
+	}
+
 }
 ?>

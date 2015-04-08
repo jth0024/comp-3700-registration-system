@@ -17,9 +17,12 @@ Class Session {
 
 	protected $userID;
 	protected $pwd;
+	protected $permissions;
 
 	public function __construct(array $params) {
 		$userID = $params['id'];
-		$pwd = $params['pass'];
+		$pwd = $params['pwd'];
+		$permissions = $params['permissions'];
 	}
+
 } ?>
