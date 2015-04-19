@@ -5,7 +5,7 @@
         .module('app.login')
         .config(configure);
 
-    function configure($stateProvider, $urlRouterProvider) {
+    function configure($stateProvider, $urlRouterProvider, ACCOUNT_PERMISSIONS) {
 
         $stateProvider
             .state('login', {
@@ -15,7 +15,8 @@
                 controllerAs: 'vm',
                 title: 'login',
                 data: {
-                    requireLogin: false
+                    requireLogin: false,
+                    authorizedRoles: [ACCOUNT_PERMISSIONS.all]
                 }
             })
     }

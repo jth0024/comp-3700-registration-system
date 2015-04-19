@@ -5,15 +5,19 @@
         .module('app.dashboard')
         .config(configure);
 
-    function configure($stateProvider, $urlRouterProvider) {
+    function configure($stateProvider, $urlRouterProvider, ACCOUNT_PERMISSIONS) {
 
         $stateProvider
-            .state('app.dashboard', {
+            .state('dashboard', {
                 url: '/dashboard',
                 templateUrl: 'app/dashboard/dashboard.html',
                 controller: 'Dashboard',
                 controllerAs: 'vm',
-                title: 'dashboard'
+                title: 'dashboard',
+                data: {
+                    requireLogin: true,
+                    authorizedRoles: [ACCOUNT_PERMISSIONS.admin, ACCOUNT_PERMISSIONS.instructor, ACCOUNT_PERMISSIONS.student]
+                }
             });
     }
 })();

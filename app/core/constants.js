@@ -4,6 +4,7 @@
     angular
         .module('app.core')
         .constant('ACCOUNT_PERMISSIONS', {
+        	all: '*',
         	admin: 'admin',
         	instructor: 'instructor',
         	student: 'student'

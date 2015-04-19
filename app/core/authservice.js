@@ -28,18 +28,19 @@
 			return({
 				name: 'Jordan',
 				username: 'jth0024',
+				role: 'student'
 			});
 		}
 
 		function isAuthenticated() {
-			return !!session.userId;
+			return !!session.accountId;
 		}
 
 		function isAuthorized(authorizedRoles) {
 			if (!angular.isArray(authorizedRoles)) {
 				authorizedRoles = [authorizedRoles];
 			}
-			return (authService.isAuthenticated() && authorizedRoles.indexOf(Session.userRole) !== -1);
+			return (isAuthenticated() && authorizedRoles.indexOf(session.accountPermission) !== -1);
 		}
 
 	}

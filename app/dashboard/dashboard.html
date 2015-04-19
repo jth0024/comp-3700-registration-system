@@ -1,3 +1,10 @@
-<div>{{vm.username}}</div>
+<div>Dashboard</div>
+<div ng-if="vm.currentUser">Welcome, {{ vm.currentUser.name }}!
+
+  <div ng-if="vm.accountPermissions.admin == vm.currentUser.role">You're an admin.</div>
+  <div ng-if="vm.accountPermissions.instructor == vm.currentUser.role">You're an instructor.</div>
+  <div ng-if="vm.accountPermissions.student == vm.currentUser.role">You're a student.</div>
+
+</div>
 
 

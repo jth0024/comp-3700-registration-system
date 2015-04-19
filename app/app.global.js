@@ -16,7 +16,12 @@
 
 		function setCurrentUser(user) {
 			$scope.currentUser = user;
+			console.log("Set current user to " + user.name);
 		}
+
+		/*function getCurrentUser() {
+
+		}*/
 	}
 
 
