@@ -1,0 +1,35 @@
+<div data-ng-if="vm.currentUser" >
+	<div class="page-header">
+		<h1>Course Catalog</h1>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Available Courses</h3>
+		</div>
+		<div class="panel-body">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Course</th>
+						<th>Day of Week</th>
+						<th>Time</th>
+						<th>Instructor</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="course in vm.courses">
+						<td>{{course.title}}</td>
+						<td>{{course.days}}</td>
+						<td>{{course.time}}</td>
+						<td>{{course.instructor}}</td>
+						<td><a>Register</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<button class="btn btn-default" ui-sref="dashboard">Go Back</button>
+</div>
+
+

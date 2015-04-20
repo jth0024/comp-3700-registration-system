@@ -25,14 +25,17 @@
                 }, function() {
                     $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                 });*/
-            var user = authservice.login(credentials);
-            if(!!user) {
-                $scope.setCurrentUser(user);
-                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+            if (credentials) {
+                var user = authservice.login(credentials);
+                if(!!user) {
+                    $scope.setCurrentUser(user);
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                }
+                else {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                }                
             }
-            else {
-                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-            }
+
         }
 
 

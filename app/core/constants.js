@@ -3,6 +3,7 @@
 
     angular
         .module('app.core')
+        .constant('toastr', toastr)
         .constant('ACCOUNT_PERMISSIONS', {
         	all: '*',
         	admin: 'admin',

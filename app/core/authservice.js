@@ -24,12 +24,14 @@
 					session.create(response.data.id, response.data.account.id, response.data.account.permission);
 					return response.data.account;
 				});*/
-			session.create('343', 'jordan', 'student');
-			return({
-				name: 'Jordan',
-				username: 'jth0024',
-				role: 'student'
-			});
+			if (credentials.username == 'jth0024' && credentials.password == 'password') {
+				session.create('343', 'jordan', 'student');
+				return({
+					name: 'Jordan',
+					username: 'jth0024',
+					role: 'student'
+				});
+			}
 		}
 
 		function isAuthenticated() {

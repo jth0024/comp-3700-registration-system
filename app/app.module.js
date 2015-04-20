@@ -5,6 +5,7 @@
 		'app.core',
 		'app.layout',
 		'app.login',
-		'app.dashboard'
+		'app.dashboard',
+		'app.catalog'
 	]);
 })();

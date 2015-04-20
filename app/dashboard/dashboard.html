@@ -1,10 +1,43 @@
-<div>Dashboard</div>
-<div ng-if="vm.currentUser">Welcome, {{ vm.currentUser.name }}!
-
-  <div ng-if="vm.accountPermissions.admin == vm.currentUser.role">You're an admin.</div>
-  <div ng-if="vm.accountPermissions.instructor == vm.currentUser.role">You're an instructor.</div>
-  <div ng-if="vm.accountPermissions.student == vm.currentUser.role">You're a student.</div>
-
+<div data-ng-if="vm.currentUser" >
+	<div class="page-header">
+		<h1>Welcome, {{ vm.currentUser.name }}!</h1>
+	</div>
+	<div data-ng-if="vm.accountPermissions.admin == vm.currentUser.role" class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Administrator Resource Links</h3>
+		</div>
+		<div class="panel-body">
+			<ul class="list-group">
+				<li class="list-group-item"><a ui-sref="#">Create Course</a></li>
+				<li class="list-group-item"><a ui-sref="#">Create Account</a></li>
+				<li class="list-group-item"><a ui-sref="#">Manage Courses</a></li>
+				<li class="list-group-item"><a ui-sref="#">Manage Accounts</a></li>
+			</ul>
+		</div>
+	</div>
+	<div data-ng-if="vm.accountPermissions.instructor == vm.currentUser.role" class="panel panel-default">
+		<div class="panel-heading" >
+			<h3>Instructor Resource Links</h3>
+		</div>
+		<div class="panel-body">
+			<ul class="list-group">
+				<li class="list-group-item"><a ui-sref="#">View Schedule</a></li>
+			</ul>
+		</div>
+	</div>
+	<div data-ng-if="vm.accountPermissions.student == vm.currentUser.role" class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Student Resource Links</h3>
+		</div>
+		<div class="panel-body">
+			<ul class="list-group">
+				<li class="list-group-item"><a ui-sref="#">View Registration Status</a></li>
+				<li class="list-group-item"><a ui-sref="app.catalog">View Course Catalog</a></li>
+				<li class="list-group-item"><a ui-sref="#">View My Schedule</a></li>
+				<li class="list-group-item"><a ui-sref="#">Add or Drop Courses</a></li>
+			</ul>
+		</div>
+	</div>
 </div>
 
 

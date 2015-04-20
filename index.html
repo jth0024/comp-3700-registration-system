@@ -7,12 +7,14 @@
   <link rel="icon" type="image/png" href="support/images/clipboard105.png"/>
   <link rel="stylesheet" href="support/css/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="support/fonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="support/css/toastr.css"/>
   <link rel="stylesheet" href="support/css/app.css"/>
   
 </head>
 <body data-ng-controller="App">
 
-	<div data-ng-include="'app/layout/shell.html'"></div>
+	<div class="wrap" data-ng-include="'app/layout/shell.html'"></div>
+  <div class="footer" data-ng-include="'app/layout/footer.html'"></div>
 
   <script src="support/js/jquery-2.1.3.min.js"></script>
   <script src="support/js/bootstrap.min.js"></script>
@@ -23,8 +25,7 @@
     <script src="support/js/angular-route.min.js"></script>
     <script src="support/js/angular-sanitize.min.js"></script>
     <script src="support/js/angular-ui-router.min.js"></script>
-    <!--<script src="support/js/angularStorage/angularStorage.js"></script>
-    <script src="support/js/angularJwt/angularJwt.js"></script>-->
+    <script src="support/js/toastr.js"></script>
     <!-- endinject -->
 
 
@@ -45,6 +46,13 @@
     <!--<script src="app/core/filters.js"></script>-->
 
     <!--widgets-->
+    <!--<script src="app/widgets/widgets.module.js"></script>
+    <script src="app/widgets/footer.directive.js"></script>-->
+
+    <!-- catalog -->
+    <script src="app/catalog/catalog.module.js"></script>
+    <script src="app/catalog/catalog.route.js"></script>
+    <script src="app/catalog/catalog.js"></script>
 
     <!-- dashboard -->
     <script src="app/dashboard/dashboard.module.js"></script>

@@ -1,10 +1,47 @@
 @import "colors";
 
+
+/***********************
+		Variables
+************************/
+@footerHeight: 100px;
+
+/***********************
+		Sticky Footer
+************************/
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+.wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -@footerHeight;
+  padding: 0 0 @footerHeight;
+}
+
+.footer {
+  height: @footerHeight;
+}
+
+
+/***********************
+		Navbar
+************************/
 .navbar
 {
 	padding: 30px 20px;
 	border-style: none;
 	border-radius: 0px;
+
+	li
+	{
+		line-height: 50px;
+	}
+
 
 }
 
@@ -14,8 +51,7 @@
 ************************/
 .login-panel
 {
-	margin-top: 100px;
-	margin-bottom: 100px;
+	margin-top: 50px;
 	margin-right: auto;
 	margin-left: auto;
 	padding: 50px 50px;
@@ -27,8 +63,9 @@
 /***********************
 		Footer
 ************************/
-footer
+.footer
 {
+
 	.container-fluid
 	{
 		padding-right: 0px;
@@ -37,13 +74,16 @@ footer
 
 	.copyright
 	{
-		background-color: @primaryBackgroundDark;
-		color: @secondaryTextWhite;
+		background-color: @lightGray;
+		color: @secondaryText;
+		line-height: @footerHeight;
 	}
 
 	.footer-section
 	{
-		padding: 50px 0px;
+		//padding: 50px 0px;
+		height: @footerHeight;
+		//margin-top: -(@footerHeight / 2);
 	}
 
 }

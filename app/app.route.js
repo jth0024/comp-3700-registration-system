@@ -12,29 +12,24 @@
 			var requireLogin = next.data.requireLogin;
 			var authorizedRoles = next.data.authorizedRoles;
 
-			/*if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
+			if(requireLogin && !authservice.isAuthorized(authorizedRoles)) {
 				event.preventDefault();
-				$state.go('login');
-			}*/
-			if(requireLogin) {
-				if(!authservice.isAuthorized(authorizedRoles)) {
-					event.preventDefault();
-					if (authservice.isAuthenticated()) {
-						//User doesn't have permission
-						$rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-					}
-					else {
-						//User isn't logging in
-						$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-						$state.go('login');
-					}
+				if (authservice.isAuthenticated()) {
+					//User doesn't have permission
+					$rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+				}
+				else {
+					//User isn't logging in
+					$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+					$state.go('login');
 				}
 			}
 
 		});
 
-		$rootScope.$on(AUTH_EVENTS.loginSuccess, function(){
-			$state.go('dashboard');
+		$rootScope.$on('$stateNotFound', function(event) {
+			event.preventDefault();
+			$state.go('404');
 		});
 
 	}
@@ -44,14 +39,15 @@
 
 		$urlRouterProvider.otherwise('/dashboard');
 
-		/*$stateProvider
+		$stateProvider
 			.state('app', {
 				abstract: true,
+				template: '<ui-view/>',
 				data: {
 					requireLogin: true,
-					authorizedRoles: [ACCOUNT_PERMISSIONS.admin, ACCOUNT_PERMISSIONS.instructor, ACCOUNT_PERMISSIONS.student]
+					//authorizedRoles: [ACCOUNT_PERMISSIONS.admin, ACCOUNT_PERMISSIONS.instructor, ACCOUNT_PERMISSIONS.student]
 				}
-			});*/
+			});
 	}
 
 })();
