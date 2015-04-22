@@ -18,6 +18,17 @@
                     //requireLogin: true,
                     authorizedRoles: [PERMISSION_TYPES.admin, PERMISSION_TYPES.instructor, PERMISSION_TYPES.student]
                 }
+            })
+            .state('app.editschedule', {
+                url: '/dashboard/schedule/edit',
+                templateUrl: 'app/schedule/editschedule.html',
+                controller: 'Schedule',
+                controllerAs: 'vm',
+                title: 'editschedule',
+                data: {
+                    //requireLogin: true,
+                    authorizedRoles: [PERMISSION_TYPES.admin, PERMISSION_TYPES.student]
+                }
             });
     }
 })();

@@ -24,12 +24,28 @@
 					session.create(response.data.id, response.data.account.id, response.data.account.permission);
 					return response.data.account;
 				});*/
-			if (credentials.username == 'jth0024' && credentials.password == 'password') {
+			if (credentials.username == 'student' && credentials.password == 'password') {
 				session.create('343', 'jordan', 'student');
 				return({
 					name: 'Jordan',
 					username: 'jth0024',
 					permission: 'student'
+				});
+			}
+			if (credentials.username == 'admin' && credentials.password == 'password') {
+				session.create('343', 'jordan', 'admin');
+				return({
+					name: 'Jordan',
+					username: 'jth0024',
+					permission: 'admin'
+				});
+			}
+			if (credentials.username == 'instructor' && credentials.password == 'password') {
+				session.create('343', 'jordan', 'instructor');
+				return({
+					name: 'Jordan',
+					username: 'jth0024',
+					permission: 'instructor'
 				});
 			}
 		}
