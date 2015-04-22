@@ -5,7 +5,7 @@
         .module('app.dashboard')
         .config(configure);
 
-    function configure($stateProvider, $urlRouterProvider, ACCOUNT_PERMISSIONS) {
+    function configure($stateProvider, $urlRouterProvider, PERMISSION_TYPES) {
 
         $stateProvider
             .state('app.dashboard', {
@@ -16,7 +16,7 @@
                 title: 'dashboard',
                 data: {
                     //requireLogin: true,
-                    authorizedRoles: [ACCOUNT_PERMISSIONS.admin, ACCOUNT_PERMISSIONS.instructor, ACCOUNT_PERMISSIONS.student]
+                    authorizedRoles: [PERMISSION_TYPES.admin, PERMISSION_TYPES.instructor, PERMISSION_TYPES.student]
                 }
             });
     }

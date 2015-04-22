@@ -6,6 +6,7 @@
 		'app.layout',
 		'app.login',
 		'app.dashboard',
-		'app.catalog'
+		'app.catalog',
+		'app.schedule'
 	]);
 })();

@@ -5,7 +5,7 @@
         .module('app.login')
         .config(configure);
 
-    function configure($stateProvider, $urlRouterProvider, ACCOUNT_PERMISSIONS) {
+    function configure($stateProvider, $urlRouterProvider, PERMISSION_TYPES) {
 
         $stateProvider
             .state('login', {
@@ -16,7 +16,7 @@
                 title: 'login',
                 data: {
                     requireLogin: false,
-                    authorizedRoles: [ACCOUNT_PERMISSIONS.all]
+                    authorizedRoles: [PERMISSION_TYPES.all]
                 }
             })
     }

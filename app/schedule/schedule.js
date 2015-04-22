@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('app.catalog')
-        .controller('Catalog', Catalog);
+        .module('app.schedule')
+        .controller('Schedule', Schedule);
         
 
-    function Catalog($scope, dataservice) {
+    function Schedule($scope, dataservice) {
         var vm = this;
 
 
@@ -14,7 +14,7 @@
 
         function activate() {
             if($scope.global.currentAccount) {
-                vm.courses = dataservice.getCoursesCatalog();
+              vm.schedule = dataservice.getSchedule(vm.currentAccount);
             }            
         }
 

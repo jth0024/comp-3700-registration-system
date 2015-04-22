@@ -2,9 +2,8 @@
 	'use strict';
 
 	angular
-		.module('app')
+		.module('app.core')
 		.run(appRun)
-		.config(configure);
 
 	function appRun($rootScope, $state, AUTH_EVENTS, authservice) {
 
@@ -32,22 +31,20 @@
 			$state.go('404');
 		});
 
-	}
+		$rootScope.$on(AUTH_EVENTS.loginSuccess, function(){
+			toastr.success('Successfully logged in ' + $scope.global.currentAccount.username + '.');
+			$state.go('app.dashboard');
+		});
 
+		$rootScope.$on(AUTH_EVENTS.loginFailed, function(){
+			toastr.error('Invalid username/password');
+		});
 
-	function configure($stateProvider, $urlRouterProvider, ACCOUNT_PERMISSIONS) {
+		$rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
+			toastr.info('Goodbye!');
+			$state.go('login');
+		});
 
-		$urlRouterProvider.otherwise('/dashboard');
-
-		$stateProvider
-			.state('app', {
-				abstract: true,
-				template: '<ui-view/>',
-				data: {
-					requireLogin: true,
-					//authorizedRoles: [ACCOUNT_PERMISSIONS.admin, ACCOUNT_PERMISSIONS.instructor, ACCOUNT_PERMISSIONS.student]
-				}
-			});
 	}
 
 })();

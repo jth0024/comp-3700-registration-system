@@ -6,25 +6,58 @@
 		.controller('App', App);
 
 
-	function App($state, $scope, $rootScope, authservice, ACCOUNT_PERMISSIONS, AUTH_EVENTS, toastr) {
+	function App($state, $scope, $rootScope, authservice, PERMISSION_TYPES, AUTH_EVENTS, toastr) {
+		var vm = this;
 
-		$scope.currentUser = null;
-		$scope.accountPermissions = ACCOUNT_PERMISSIONS;
-		$scope.isAuthorized = authservice.isAuthorized;	
-		$scope.setCurrentUser = setCurrentUser;
+		vm.currentAccount = null;
+		vm.permissionTypes = PERMISSION_TYPES;
+		vm.isAuthorized = authservice.isAuthorized;	
+		vm.setCurrentAccount = setCurrentAccount;
 
 
-		function setCurrentUser(user) {
-			$scope.currentUser = user;
+		function setCurrentAccount(account) {
+			vm.currentAccount = account;
 		}
 
+
+		///////////////////////Global $rootScope event listeners///////////////////////////////////
+
+		$rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
+			var requireLogin = next.data.requireLogin;
+			var authorizedRoles = next.data.authorizedRoles;
+
+			if(requireLogin && !authservice.isAuthorized(authorizedRoles)) {
+				event.preventDefault();
+				if (authservice.isAuthenticated()) {
+					//User doesn't have permission
+					$rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+				}
+				else {
+					//User isn't logging in
+					$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+					$state.go('login');
+				}
+			}
+
+		});
+
+		$rootScope.$on('$stateNotFound', function(event) {
+			event.preventDefault();
+			$state.go('404');
+		});
+
 		$rootScope.$on(AUTH_EVENTS.loginSuccess, function(){
-			toastr.success('Successfully logged in ' + $scope.currentUser.username + '.');
+			toastr.success('Successfully logged in ' + vm.currentAccount.username + '.');
 			$state.go('app.dashboard');
 		});
 
 		$rootScope.$on(AUTH_EVENTS.loginFailed, function(){
 			toastr.error('Invalid username/password');
+		});
+
+		$rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
+			toastr.info('Goodbye!');
+			$state.go('login');
 		});
 	}
 

@@ -17,8 +17,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-if="currentUser"><a class="" ui-sref="dashboard">Home</a></li>
-        <li ng-if="currentUser"><button class="btn btn-danger">Logout</button></li>
+        <li data-ng-if="global.currentAccount"><button class="btn btn-default username-button" ui-sref="app.dashboard">{{global.currentAccount.username}}</button></li>
+        <li data-ng-if="global.currentAccount"><button data-ng-click="vm.logout()" class="btn btn-danger">Logout</button></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

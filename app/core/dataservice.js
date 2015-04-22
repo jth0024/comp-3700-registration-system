@@ -8,7 +8,8 @@
     function dataservice($http) {
 
         var service = {
-            getCoursesCatalog: getCoursesCatalog
+            getCoursesCatalog: getCoursesCatalog,
+            getSchedule: getSchedule
         };
 
         return service;
@@ -22,32 +23,67 @@
             });*/
             var courses = [
                 {
-                    title: 'Mechanics',
-                    instructor: 'Davison',
-                    time: '11:00',
-                    days: 'T/R'
+                    title: 'Renewable Energy',
+                    instructor: 'Bhavnani',
+                    time: ['9:30', '10:45'],
+                    days: ['T','R']
                 },
                 {
-                    title: 'Mechanics',
-                    instructor: 'Davison',
-                    time: '11:00',
-                    days: 'T/R'
+                    title: 'Software Modeling',
+                    instructor: 'Yilmaz',
+                    time: ['12:30', '1:45'],
+                    days: ['T','R']
                 },
                 {
-                    title: 'Mechanics',
-                    instructor: 'Davison',
-                    time: '11:00',
-                    days: 'T/R'
+                    title: 'Algorithms',
+                    instructor: 'Chapman',
+                    time: ['2:00', '3:15'],
+                    days: ['T','R']
                 },
                 {
-                    title: 'Mechanics',
-                    instructor: 'Davison',
-                    time: '11:00',
-                    days: 'T/R'
+                    title: 'HVAC',
+                    instructor: 'Dyer',
+                    time: ['11:00', '12:15'],
+                    days: ['T','R']
                 }
             ];
             return courses;
         };
+
+        function getSchedule(account) {
+            //Change code when Sam's url is working
+            /*return $http.get("schedule url")
+                .then(function(response) {
+                    return response.data;
+            });*/
+            var schedule = [
+                {
+                    title: 'Renewable Energy',
+                    instructor: 'Bhavnani',
+                    time: ['9:30', '10:45'],
+                    days: ['T','R']
+                },
+                {
+                    title: 'Software Modeling',
+                    instructor: 'Yilmaz',
+                    time: ['12:30', '1:45'],
+                    days: ['T','R']
+                },
+                {
+                    title: 'Algorithms',
+                    instructor: 'Chapman',
+                    time: ['2:00', '3:15'],
+                    days: ['T','R']
+                },
+                {
+                    title: 'HVAC',
+                    instructor: 'Dyer',
+                    time: ['11:00', '12:15'],
+                    days: ['T','R']
+                }
+            ];
+            return schedule;
+        }
 
     }
 })();

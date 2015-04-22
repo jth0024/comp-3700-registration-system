@@ -1,0 +1,60 @@
+<div data-ng-if="global.currentAccount" >
+	<div class="page-header">
+		<h1>My Schedule</h1>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Registered Courses</h3>
+		</div>
+		<div class="panel-body">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Course</th>
+						<th>Day of Week</th>
+						<th>Time</th>
+						<th>Instructor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="course in vm.schedule">
+						<td>{{course.title}}</td>
+						<td><span data-ng-repeat="day in course.days track by $index">{{day}}</span></td>
+						<td><span data-ng-repeat="time in course.time track by $index">{{time}}</span></td>
+						<td>{{course.instructor}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Week at a Glance</h3>
+		</div>
+		<div class="panel-body">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Monday</th>
+						<th>Tuesday</th>
+						<th>Wednesday</th>
+						<th>Thursday</th>
+						<th>Friday</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="course in vm.schedule">
+						<td><div data-ng-if="course.days.indexOf('M') !== -1">{{course.title}}</div></td>
+						<td><div data-ng-if="course.days.indexOf('T') !== -1">{{course.title}}</div></td>
+						<td><div data-ng-if="course.days.indexOf('W') !== -1">{{course.title}}</div></td>
+						<td><div data-ng-if="course.days.indexOf('R') !== -1">{{course.title}}</div></td>
+						<td><div data-ng-if="course.days.indexOf('F') !== -1">{{course.title}}</div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>
+</div>
+
+

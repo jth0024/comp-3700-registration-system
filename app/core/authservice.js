@@ -11,7 +11,7 @@
 			login: login,
 			isAuthenticated: isAuthenticated,
 			isAuthorized: isAuthorized,
-
+			logout: logout
 		};
 
 		return service;
@@ -29,9 +29,13 @@
 				return({
 					name: 'Jordan',
 					username: 'jth0024',
-					role: 'student'
+					permission: 'student'
 				});
 			}
+		}
+
+		function logout() {
+			session.destroy();
 		}
 
 		function isAuthenticated() {
@@ -42,7 +46,7 @@
 			if (!angular.isArray(authorizedRoles)) {
 				authorizedRoles = [authorizedRoles];
 			}
-			return (isAuthenticated() && authorizedRoles.indexOf(session.accountPermission) !== -1);
+			return (isAuthenticated() && authorizedRoles.indexOf(session.permission) !== -1);
 		}
 
 	}

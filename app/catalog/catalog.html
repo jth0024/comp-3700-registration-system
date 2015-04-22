@@ -1,4 +1,4 @@
-<div data-ng-if="vm.currentUser" >
+<div data-ng-if="global.currentAccount" >
 	<div class="page-header">
 		<h1>Course Catalog</h1>
 	</div>
@@ -20,16 +20,16 @@
 				<tbody>
 					<tr data-ng-repeat="course in vm.courses">
 						<td>{{course.title}}</td>
-						<td>{{course.days}}</td>
-						<td>{{course.time}}</td>
+						<td><span data-ng-repeat="day in course.days track by $index">{{day}}</span></td>
+						<td><span data-ng-repeat="time in course.time track by $index">{{time}}</span></td>
 						<td>{{course.instructor}}</td>
-						<td><a>Register</a></td>
+						<td><button class="btn btn-primary">Add</button></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<button class="btn btn-default" ui-sref="dashboard">Go Back</button>
+	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>
 </div>
 
 

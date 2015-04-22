@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="support/css/app.css"/>
   
 </head>
-<body data-ng-controller="App">
+<body data-ng-controller="App as global">
 
 	<div class="wrap" data-ng-include="'app/layout/shell.html'"></div>
   <div class="footer" data-ng-include="'app/layout/footer.html'"></div>
@@ -43,7 +43,7 @@
     <script src="app/core/dataservice.js"></script>
     <script src="app/core/authservice.js"></script>
     <script src="app/core/session.js"></script>
-    <!--<script src="app/core/filters.js"></script>-->
+    <!--<script src="app/core/listeners.js"></script>-->
 
     <!--widgets-->
     <!--<script src="app/widgets/widgets.module.js"></script>
@@ -67,6 +67,11 @@
     <script src="app/login/login.module.js"></script>
     <script src="app/login/login.route.js"></script>
     <script src="app/login/login.js"></script>
+
+    <!-- schedule -->
+    <script src="app/schedule/schedule.module.js"></script>
+    <script src="app/schedule/schedule.route.js"></script>
+    <script src="app/schedule/schedule.js"></script>
 
 
     <!-- endinject -->

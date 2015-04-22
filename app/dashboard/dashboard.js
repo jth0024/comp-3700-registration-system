@@ -8,14 +8,11 @@
 
     function Dashboard($scope) {
         var vm = this;
-        vm.currentUser = null;
-        vm.accountPermissions = $scope.accountPermissions;
         activate();
 
         function activate() {
-            if($scope.currentUser) {
-              vm.currentUser = $scope.currentUser; 
-              console.log(vm.accountPermissions.student == vm.currentUser.role); 
+            if($scope.global.currentAccount) {
+
             }
             
         }

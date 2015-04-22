@@ -2,18 +2,18 @@
     'use strict';
 
     angular
-        .module('app.catalog')
+        .module('app.schedule')
         .config(configure);
 
     function configure($stateProvider, $urlRouterProvider, PERMISSION_TYPES) {
 
         $stateProvider
-            .state('app.catalog', {
-                url: '/dashboard/catalog',
-                templateUrl: 'app/catalog/catalog.html',
-                controller: 'Catalog',
+            .state('app.schedule', {
+                url: '/dashboard/schedule',
+                templateUrl: 'app/schedule/schedule.html',
+                controller: 'Schedule',
                 controllerAs: 'vm',
-                title: 'catalog',
+                title: 'schedule',
                 data: {
                     //requireLogin: true,
                     authorizedRoles: [PERMISSION_TYPES.admin, PERMISSION_TYPES.instructor, PERMISSION_TYPES.student]

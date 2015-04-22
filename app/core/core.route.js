@@ -5,7 +5,7 @@
         .module('app.core')
         .config(configure);
 
-    function configure($stateProvider, $urlRouterProvider, ACCOUNT_PERMISSIONS) {
+    function configure($stateProvider, $urlRouterProvider, PERMISSION_TYPES) {
 
         $stateProvider
             .state('404', {
@@ -14,7 +14,7 @@
                 title: '404',
                 data: {
                     requireLogin: false,
-                    authorizedRoles: [ACCOUNT_PERMISSIONS.all]
+                    authorizedRoles: [PERMISSION_TYPES.all]
                 }
             });
     }

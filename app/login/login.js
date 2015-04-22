@@ -19,25 +19,24 @@
         function authenticate (credentials) {
             /*Correct code if promise is returned
             authservice.login(credentials)
-                .then(function(user) {
+                .then(function(account) {
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                    $scope.setCurrentUser(user);
+                    $scope.setCurrentAccount(account);
                 }, function() {
                     $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                 });*/
             if (credentials) {
-                var user = authservice.login(credentials);
-                if(!!user) {
-                    $scope.setCurrentUser(user);
+                var account = authservice.login(credentials);
+                if(!!account) {
+                    $scope.global.setCurrentAccount(account);
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                 }
                 else {
                     $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                }                
+                }             
             }
 
         }
-
 
     }
 })();

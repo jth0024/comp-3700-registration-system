@@ -4,7 +4,7 @@
     angular
         .module('app.core')
         .constant('toastr', toastr)
-        .constant('ACCOUNT_PERMISSIONS', {
+        .constant('PERMISSION_TYPES', {
         	all: '*',
         	admin: 'admin',
         	instructor: 'instructor',
