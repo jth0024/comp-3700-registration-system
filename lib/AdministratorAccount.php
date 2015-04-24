@@ -1,5 +1,5 @@
 <?php 
-include('Account.php');
+require_once('Account.php');
 
 /***************************************
 *
@@ -19,9 +19,10 @@ include('Account.php');
 Class AdministratorAccount extends Account {
 
 	public function __construct(array $params) {
-		$id = $params['id'];
-		$pwd = sha1($params['pwd']); //Whenever receiving password, encrypt it.
-		$permissions = ADMINISTRATOR_PERMISSIONS;
+		$this->username = $params['username'];
+		$this->name = $params['name'];
+		$this->pwd = $params['pwd'];
+		$this->permissions = ADMINISTRATOR_PERMISSIONS;
 	}
 
 }

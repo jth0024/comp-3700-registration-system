@@ -18,7 +18,7 @@
 Class Course {
 
 	protected $name;
-	protected $roster[];
+	protected $roster;
 	protected $instructor;
 
 	public function __construct(array $params) {

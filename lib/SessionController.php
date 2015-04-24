@@ -1,7 +1,7 @@
 <?php 
-include('AccountManager.php');
-include('CourseManager.php');
-include('Session.php');
+require_once('AccountManager.php');
+require_once('CourseManager.php');
+require_once('Session.php');
 /***************************************
 *
 * The SessionController handles session 
@@ -23,33 +23,32 @@ Class SessionController {
 	protected $account_manager;
 	protected $session;
 
-	public function __construct(array $params) {
-		$course_manager = new CourseManager();
-		$account_manager = new AccountManager();
-		$session = new Session();
+	public function __construct() {
+		$this->course_manager = new CourseManager();
+		$this->account_manager = new AccountManager();
+		//$session = new Session();
 	}
 
 	public function checkAccount(array $params) {
-		$curAccount = $account_manager->getAccount($params['id']);
-		if(sha1($params['pwd']) == $curAccount['pwd']) {
-			return true;
-			// set up the $session with account details like
-			// permissions etc.
+		$curAccount = $this->account_manager->getAccount($params['username']);
+		//if(sha1($params['pwd']) == $curAccount['pwd']) {
+		if($params['pwd'] == $curAccount->getPwd()) {
+			$result = array('username' => $curAccount->getUsername(), 'name' => $curAccount->getName(), 'permission' => $curAccount->getPermissions());
+			return $this->prep($result);
 		}
-		else return false;
-			// uh.. log out?
+		else return null;
 	}
 
 	public function listCourses() {
-		$courses = $course_manager->getCourses();
-		return ajax($courses);
+		$courses = $this->course_manager->getCourses();
+		return $this->prep($courses);
 	}
 
 	public function addCourse(array $params) {
 		$course_manager->addCourse($params);
 	}
 
-	private function ajax(array $input) {
+	private function prep(array $input) {
 		return json_encode($input);
 	}
 
