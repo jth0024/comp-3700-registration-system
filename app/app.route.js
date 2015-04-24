@@ -8,7 +8,7 @@
 
 	function configure($stateProvider, $urlRouterProvider) {
 
-		$urlRouterProvider.otherwise('/dashboard');
+		$urlRouterProvider.otherwise('/login');
 
 		//all children of app state inherit requireLoging = true
 		$stateProvider

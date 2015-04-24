@@ -38,6 +38,7 @@ Class SessionController {
 		}
 		else return false;
 			// uh.. log out?
+			//return a null object to jordan so he knows authentication failed
 	}
 
 	public function listCourses() {

@@ -15,7 +15,6 @@
                 controllerAs: 'vm',
                 title: 'dashboard',
                 data: {
-                    //requireLogin: true,
                     authorizedRoles: [PERMISSION_TYPES.admin, PERMISSION_TYPES.instructor, PERMISSION_TYPES.student]
                 }
             });

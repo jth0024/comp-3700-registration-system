@@ -5,11 +5,15 @@
         .module('app.core')
         .factory('httpservice', httpservice);
 
-    function httpservice($http) {
+    function httpservice($http, session) {
 
         var service = {
             getCoursesCatalog: getCoursesCatalog,
-            getSchedule: getSchedule
+            getSchedule: getSchedule,
+            login: login,
+            isAuthenticated: isAuthenticated,
+            isAuthorized: isAuthorized,
+            logout: logout
         };
 
         return service;
@@ -83,6 +87,59 @@
                 }
             ];
             return schedule;
+        }
+
+        function login(credentials) {
+            //Uncomment once sam finishes login url
+            var postData = {
+                request_type: 'log_in',
+                username: credentials.username,
+                password: credentials.password
+            };
+            return $http.post('http://sasbartlett.com/comp3700/lib/dev.php', postData)
+                .then(function(response) {
+                    session.create(response.data.name, response.data.username, response.data.permission);
+                    return {name: response.data.name, username: response.data.username, permission: response.data.permission};
+                });
+            /*if (credentials.username == 'student' && credentials.password == 'password') {
+                session.create('343', 'student', 'student');
+                return({
+                    name: 'Jordan',
+                    username: 'student',
+                    permission: 'student'
+                });
+            }
+            if (credentials.username == 'admin' && credentials.password == 'password') {
+                session.create('343', 'admin', 'admin');
+                return({
+                    name: 'Greg',
+                    username: 'admin',
+                    permission: 'admin'
+                });
+            }
+            if (credentials.username == 'instructor' && credentials.password == 'password') {
+                session.create('343', 'instructor', 'instructor');
+                return({
+                    name: 'Sara',
+                    username: 'instructor',
+                    permission: 'instructor'
+                });
+            }*/
+        }
+
+        function logout() {
+            session.destroy();
+        }
+
+        function isAuthenticated() {
+            return !!session.accountId;
+        }
+
+        function isAuthorized(authorizedRoles) {
+            if (!angular.isArray(authorizedRoles)) {
+                authorizedRoles = [authorizedRoles];
+            }
+            return (isAuthenticated() && authorizedRoles.indexOf(session.permission) !== -1);
         }
 
     }

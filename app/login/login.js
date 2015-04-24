@@ -6,7 +6,7 @@
         .controller('Login', Login);
         
 
-    function Login($scope, $rootScope, AUTH_EVENTS, authservice) {
+    function Login($scope, $rootScope, AUTH_EVENTS, httpservice) {
         var vm = this;
         vm.authenticate = authenticate;
 
@@ -18,7 +18,7 @@
 
         function authenticate (credentials) {
             /*Correct code if promise is returned
-            authservice.login(credentials)
+            httpservice.login(credentials)
                 .then(function(account) {
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                     $scope.setCurrentAccount(account);
@@ -26,7 +26,7 @@
                     $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                 });*/
             if (credentials) {
-                var account = authservice.login(credentials);
+                var account = httpservice.login(credentials);
                 if(!!account) {
                     $scope.global.setCurrentAccount(account);
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);

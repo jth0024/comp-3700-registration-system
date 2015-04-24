@@ -6,7 +6,7 @@
         .controller('Schedule', Schedule);
         
 
-    function Schedule($scope, dataservice) {
+    function Schedule($scope, httpservice) {
         var vm = this;
 
 
@@ -14,7 +14,7 @@
 
         function activate() {
             if($scope.global.currentAccount) {
-              vm.schedule = dataservice.getSchedule(vm.currentAccount);
+              vm.schedule = httpservice.getSchedule(vm.currentAccount);
             }            
         }
 

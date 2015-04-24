@@ -6,7 +6,7 @@
         .controller('Catalog', Catalog);
         
 
-    function Catalog($scope, dataservice) {
+    function Catalog($scope, httpservice) {
         var vm = this;
 
 
@@ -14,7 +14,7 @@
 
         function activate() {
             if($scope.global.currentAccount) {
-                vm.courses = dataservice.getCoursesCatalog();
+                vm.courses = httpservice.getCoursesCatalog();
             }            
         }
 

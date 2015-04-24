@@ -6,12 +6,12 @@
 		.controller('App', App);
 
 
-	function App($state, $scope, $rootScope, authservice, PERMISSION_TYPES, AUTH_EVENTS, toastr) {
+	function App($state, $scope, $rootScope, httpservice, PERMISSION_TYPES, AUTH_EVENTS, toastr) {
 		var vm = this;
 
 		vm.currentAccount = null;
 		vm.permissionTypes = PERMISSION_TYPES;
-		vm.isAuthorized = authservice.isAuthorized;	
+		vm.isAuthorized = httpservice.isAuthorized;	
 		vm.setCurrentAccount = setCurrentAccount;
 
 
@@ -26,9 +26,9 @@
 			var requireLogin = next.data.requireLogin;
 			var authorizedRoles = next.data.authorizedRoles;
 
-			if(requireLogin && !authservice.isAuthorized(authorizedRoles)) {
+			if(requireLogin && !httpservice.isAuthorized(authorizedRoles)) {
 				event.preventDefault();
-				if (authservice.isAuthenticated()) {
+				if (httpservice.isAuthenticated()) {
 					//User doesn't have permission
 					$rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
 				}

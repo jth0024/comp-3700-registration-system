@@ -5,7 +5,7 @@
         .module('app.layout')
         .controller('Topnav', Topnav);
 
-    function Topnav($scope, $rootScope, AUTH_EVENTS, authservice) {
+    function Topnav($scope, $rootScope, AUTH_EVENTS, httpservice) {
         /*jshint validthis: true */
         var vm = this;
         vm.title = 'Tiger Registration System';
@@ -21,7 +21,7 @@
 
 
         function logout() {
-            authservice.logout();
+            httpservice.logout();
             $scope.global.setCurrentAccount(null);
             $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
         }

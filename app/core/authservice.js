@@ -3,9 +3,9 @@
 
 	angular
 		.module('app.core')
-		.factory('authservice', authservice);
+		.factory('httpservice', httpservice);
 
-	function authservice($http, session) {
+	function httpservice($http, session) {
 
 		var service = {
 			login: login,
@@ -25,26 +25,26 @@
 					return response.data.account;
 				});*/
 			if (credentials.username == 'student' && credentials.password == 'password') {
-				session.create('343', 'jordan', 'student');
+				session.create('343', 'student', 'student');
 				return({
 					name: 'Jordan',
-					username: 'jth0024',
+					username: 'student',
 					permission: 'student'
 				});
 			}
 			if (credentials.username == 'admin' && credentials.password == 'password') {
-				session.create('343', 'jordan', 'admin');
+				session.create('343', 'admin', 'admin');
 				return({
-					name: 'Jordan',
-					username: 'jth0024',
+					name: 'Greg',
+					username: 'admin',
 					permission: 'admin'
 				});
 			}
 			if (credentials.username == 'instructor' && credentials.password == 'password') {
-				session.create('343', 'jordan', 'instructor');
+				session.create('343', 'instructor', 'instructor');
 				return({
-					name: 'Jordan',
-					username: 'jth0024',
+					name: 'Sara',
+					username: 'instructor',
 					permission: 'instructor'
 				});
 			}

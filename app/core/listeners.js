@@ -5,15 +5,15 @@
 		.module('app.core')
 		.run(appRun)
 
-	function appRun($rootScope, $state, AUTH_EVENTS, authservice) {
+	function appRun($rootScope, $state, AUTH_EVENTS, httpservice) {
 
 		$rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
 			var requireLogin = next.data.requireLogin;
 			var authorizedRoles = next.data.authorizedRoles;
 
-			if(requireLogin && !authservice.isAuthorized(authorizedRoles)) {
+			if(requireLogin && !httpservice.isAuthorized(authorizedRoles)) {
 				event.preventDefault();
-				if (authservice.isAuthenticated()) {
+				if (httpservice.isAuthenticated()) {
 					//User doesn't have permission
 					$rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
 				}

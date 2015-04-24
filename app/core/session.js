@@ -11,14 +11,14 @@
         this.create = create;
         this.destroy = destroy;
 
-        function create(sessionId, accountId, permission) {
-            this.id = sessionId;
-            this.accountId = accountId;
+        function create(name, username, permission) {
+            this.name = name;
+            this.accountId = username;
             this.permission = permission;
         }
 
         function destroy() {
-            this.id = null;
+            this.name = null;
             this.accountId = null;
             this.permission = null;
         }
