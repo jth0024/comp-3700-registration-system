@@ -1,7 +1,7 @@
 <?php 
-include('config.php');
-include('Db_Controller.php');
-include('Course.php');
+require_once('config.php');
+require_once('Db_Controller.php');
+require_once('Course.php');
 /***************************************
 *
 * The CourseManager handles course 
@@ -21,19 +21,23 @@ Class CourseManager {
 
 	protected $db;
 
-	public function __construct(array $params) {
-		$db = new Db_Controller(HOST, USERNAME, PASSWORD);
+	public function __construct() {
+		$params = array('host' => HOST, 'username' => USERNAME, 'password' => PASSWORD, 'db' => DATABASE);
+		$this->db = new Db_Controller($params);
 	}
 
 	public function getCourses() {
-		$courses = $db->get(COURSES_TABLE, '*');
-		return $courses;
+		$courses = $this->db->get(COURSES_TABLE, array());
+		$courseList = array();
+		foreach($courses as $course) {
+			$courseList[$course['dbID']] = $course['name'];
+		}
+		return $courseList;
 	}
 
 	public function addCourse(array $params) {
 		$newCourse = new Course($params);
-		$db->insert(COURSES_TABLE, array('name': $newCourse->getName(), 'instructor': $newCourse->getInstructor(), 
-			'students': $newCourse->getStudents()));
+		$this->db->insert(COURSES_TABLE, array('name' => $newCourse->getName(), 'instructor' => $newCourse->getInstructor(), 'students' => $newCourse->getStudents()));
 	}
 
 	public function __destruct() {

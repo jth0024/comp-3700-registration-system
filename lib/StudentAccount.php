@@ -1,5 +1,5 @@
 <?php 
-include('Account.php');
+require_once('Account.php');
 
 /***************************************
 *
@@ -21,9 +21,10 @@ Class StudentAccount extends Account {
 	protected $schedule;
 
 	public function __construct(array $params) {
-		$id = $params['id'];
-		$pwd = sha1($params['pwd']); //Whenever receiving password, encrypt it.
-		$permissions = STUDENT_PERMISSIONS;
+		$this->username = $params['username'];
+		$this->name = $params['name'];
+		$this->pwd = $params['pwd'];
+		$this->permissions = STUDENT_PERMISSIONS;
 	}
 }
 ?>

@@ -17,10 +17,11 @@ Class Db_Controller {
   	
   	// Variable holding the connection to the database
   	protected	$_con=null;
+  	protected   $_recordset=null;
 
   	//Constructor, takes in connection parameters
 	public function __construct(array $params) {
-		$this->_con = mysqli_connect($params['host'],$params['username'],$params['password']) or die('Connection error');
+		$this->_con = mysqli_connect($params['host'],$params['username'],$params['password'],$params['db']) or die('Connection error');
 	}
 
 	// Useful for building, should be removed later
@@ -65,15 +66,33 @@ Class Db_Controller {
 
 	// Getter
 	public function get($table,$where) {	
-		$query="SELECT * FROM `".$table."`   WHERE 1 ";
-		foreach($where as $field=>$val):
-		$query.=" AND `".$field."`='".mysqli_real_escape_string($this->_con,$val)."' ";
-		endforeach;
-		$query.=" LIMIT 0,1";
+		$query="SELECT * FROM `".$table ."`  WHERE 1";
+		if($where.length > 0) { 
+			foreach($where as $field=>$val):
+			$query.=" AND `".$field."`='".mysqli_real_escape_string($this->_con,$val)."' ";
+			endforeach;
+			$query.=" LIMIT 0,1";
+		}
 		$result=$this->execute($query) ;
-		$row=mysqli_fetch_assoc($result);
-		return $row;
+		$return = array();
+		while ($row = mysqli_fetch_assoc($result)) {
+			$return[] = $row;
+		}
+		return $return;
 	}
+
+
+  
+  
+  public function execute($query)
+  {
+	  if ($this->_recordset = mysqli_query($this->_con,$query)) {
+		return $this->_recordset;
+	  } else {
+       die("Error in executing query... :: ".$query." <br/>".mysqli_error($this->_con));
+      }
+  }
+  
 
 	// Tidy yo shit up
 	public function __destruct() {

@@ -1,5 +1,5 @@
 <?php 
-include('config.php');
+require_once('config.php');
 /***************************************
 *
 * The Account represents users of the systems.
@@ -16,30 +16,48 @@ include('config.php');
 
 Class Account {
 
-	protected $id;
+	protected $username;
+	protected $name;
 	protected $pwd; //Should be stored with sha1 hash.
 	protected $permissions;
 
 	public function __construct(array $params) {
-		$id = $params['id'];
-		$pwd = sha1($params['pwd']); //Whenever receiving password, encrypt it.
-		$permissions = NO_PERMISSIONS;
+		$this->username = $params['username'];
+		$this->name = $params['name'];
+		$this->pwd = $params['pwd'];
+		$this->permissions = NO_PERMISSIONS;
 	}
 
-	public function getId() {
-		return $id;
+	public function getUsername() {
+		return $this->username;
 	}
 
-	public function setId($newId) {
-		$id = $newId;
+	public function setUsername($newId) {
+		$this->username = $newId;
+	}
+
+	public function getName() {
+		return $this->name;
+	}
+
+	public function setName($newName) {
+		$this->name = $newName;
+	}
+
+	public function getPermissions() {
+		return $this->permissions;
+	}
+
+	public function setPermissions($newPermissions) {
+		$this->permissons = $newPermissions;
 	}
 
 	public function getPwd() {
-		return $pwd;
+		return $this->pwd;
 	}
 
 	public function setPwd($newPwd) {
-		$pwd = sha1($params($newPwd));
+		$this->pwd = sha1($params($newPwd));
 	}
 
 	public function __destruct() {

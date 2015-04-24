@@ -1,9 +1,9 @@
 <?php 
-include('config.php');
-include('Db_Controller.php');
-include('AdministratorAccount.php');
-include('StudentAccount.php');
-include('TeacherAccount.php');
+require_once('config.php');
+require_once('Db_Controller.php');
+require_once('AdministratorAccount.php');
+require_once('StudentAccount.php');
+require_once('TeacherAccount.php');
 /***************************************
 *
 * The AccountManager handles account 
@@ -22,15 +22,31 @@ include('TeacherAccount.php');
 Class AccountManager {
 
 	protected $db;
+	protected $dp_params;
 
-	public function __construct(array $params) {
-		$db = new Db_Controller(HOST, USERNAME, PASSWORD);
+	public function __construct() {
+		$params = array('host' => HOST, 'username' => USERNAME, 'password' => PASSWORD, 'db' => DATABASE);
+		$this->db = new Db_Controller($params);
 	}
 
 	public function getAccount($id) {
-		$accountArray = $db->get(ACCOUNTS_TABLE, array('id', $id));
-		// Switch statement based on the types of accounts
-		// Need to determine how to track this in the database (permissions?)
+		$accountArray = $this->db->get(ACCOUNTS_TABLE, array('username' => $id))[0];
+		$params = array('username' => $accountArray['username'], 'pwd' => $accountArray['pwd'], 'name' => $accountArray['name'], 'permissions' => $accountArray['permissions']);
+		switch($accountArray['permissions']) {
+			case ADMINISTRATOR_PERMISSIONS:
+				$account = new AdministratorAccount($params);
+			break;
+			case STUDENT_PERMISSIONS:
+				$account = new StudentAccount($params);
+			break;
+			case TEACHER_PERMISSIONS:
+				$account = new TeacherAccount($params);
+			break;
+			case NO_PERMISSIONS:
+				$account = new Account($params);
+			break;
+		}
+		return $account;
 	}
 
 	// This feels like cheating the system.

@@ -15,6 +15,8 @@
 
 Class Session {
 
+	// HOLD ACCOUNT OBJECT
+
 	protected $userID;
 	protected $pwd;
 	protected $permissions;
