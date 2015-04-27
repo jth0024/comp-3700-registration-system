@@ -17,23 +17,20 @@
         }
 
         function authenticate (credentials) {
-            /*Correct code if promise is returned
-            httpservice.login(credentials)
-                .then(function(account) {
-                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                    $scope.setCurrentAccount(account);
-                }, function() {
-                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                });*/
+
             if (credentials) {
-                var account = httpservice.login(credentials);
-                if(!!account) {
-                    $scope.global.setCurrentAccount(account);
-                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                }
-                else {
-                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                }             
+                httpservice.login(credentials).then(function (response) {
+                        if (!!response.error) {
+                            $rootScope.$broadcast(AUTH_EVENTS.loginFailed, response);
+                        }
+                        else {
+                            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response); 
+                        }
+                        
+                        //console.log
+                    }, function () {
+                      $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                    });         
             }
 
         }

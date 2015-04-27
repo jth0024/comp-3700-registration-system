@@ -6,7 +6,7 @@
 		.controller('App', App);
 
 
-	function App($state, $scope, $rootScope, httpservice, PERMISSION_TYPES, AUTH_EVENTS, toastr) {
+	function App($state, $scope, $rootScope, httpservice, PERMISSION_TYPES, AUTH_EVENTS, toastr, session) {
 		var vm = this;
 
 		vm.currentAccount = null;
@@ -46,13 +46,15 @@
 			$state.go('404');
 		});
 
-		$rootScope.$on(AUTH_EVENTS.loginSuccess, function(){
+		$rootScope.$on(AUTH_EVENTS.loginSuccess, function(event, args){
+			session.create(args.name, args.username, args.permission);
+			vm.setCurrentAccount(args);
 			toastr.success('Successfully logged in ' + vm.currentAccount.username + '.');
 			$state.go('app.dashboard');
 		});
 
-		$rootScope.$on(AUTH_EVENTS.loginFailed, function(){
-			toastr.error('Invalid username/password');
+		$rootScope.$on(AUTH_EVENTS.loginFailed, function(event, args){
+			toastr.error('Error: ' + args.error.msg);
 		});
 
 		$rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){

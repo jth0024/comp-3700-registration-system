@@ -3,7 +3,7 @@
 
 	angular
 		.module('app')
-		.config(configure);
+		.config(configure)
 
 
 	function configure($stateProvider, $urlRouterProvider) {

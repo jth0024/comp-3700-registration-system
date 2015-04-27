@@ -90,41 +90,26 @@
         }
 
         function login(credentials) {
-            //Uncomment once sam finishes login url
-            var postData = {
+            
+            var requestUrl = 'http://sasbartlett.com/comp3700/lib/index.php';
+            var message = {
                 request_type: 'log_in',
                 username: credentials.username,
                 password: credentials.password
             };
-            return $http.post('http://sasbartlett.com/comp3700/lib/dev.php', postData)
+            message = JSON.stringify(message);
+            
+            return $http({
+                    method: 'POST',
+                    url: requestUrl,
+                    data: "message=" + message,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
                 .then(function(response) {
-                    session.create(response.data.name, response.data.username, response.data.permission);
-                    return {name: response.data.name, username: response.data.username, permission: response.data.permission};
+                    //session.create(response.data.name, response.data.username, response.data.permission);
+                    console.log(response);
+                    return response.data;
                 });
-            /*if (credentials.username == 'student' && credentials.password == 'password') {
-                session.create('343', 'student', 'student');
-                return({
-                    name: 'Jordan',
-                    username: 'student',
-                    permission: 'student'
-                });
-            }
-            if (credentials.username == 'admin' && credentials.password == 'password') {
-                session.create('343', 'admin', 'admin');
-                return({
-                    name: 'Greg',
-                    username: 'admin',
-                    permission: 'admin'
-                });
-            }
-            if (credentials.username == 'instructor' && credentials.password == 'password') {
-                session.create('343', 'instructor', 'instructor');
-                return({
-                    name: 'Sara',
-                    username: 'instructor',
-                    permission: 'instructor'
-                });
-            }*/
         }
 
         function logout() {
