@@ -19,13 +19,13 @@ Class Account {
 	protected $username;
 	protected $name;
 	protected $pwd; //Should be stored with sha1 hash.
-	protected $permissions;
+	protected $permission;
 
 	public function __construct(array $params) {
 		$this->username = $params['username'];
 		$this->name = $params['name'];
 		$this->pwd = $params['pwd'];
-		$this->permissions = NO_PERMISSIONS;
+		$this->permission = NO_PERMISSIONS;
 	}
 
 	public function getUsername() {
@@ -44,20 +44,24 @@ Class Account {
 		$this->name = $newName;
 	}
 
-	public function getPermissions() {
-		return $this->permissions;
+	public function getPermission() {
+		return $this->permission;
 	}
 
-	public function setPermissions($newPermissions) {
-		$this->permissons = $newPermissions;
+	public function setPermission($newPermission) {
+		$this->permisson = $newPermission;
 	}
 
-	public function getPwd() {
+	public function getPassword() {
 		return $this->pwd;
 	}
 
-	public function setPwd($newPwd) {
+	public function setPassword($newPwd) {
 		$this->pwd = sha1($params($newPwd));
+	}
+
+	public function toJSON() {
+		return json_encode(array('username' => $this->username, 'name' => $this->name, 'permission' => $this->permission));
 	}
 
 	public function __destruct() {

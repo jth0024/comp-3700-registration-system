@@ -1,6 +1,6 @@
 <?php 
 require_once('Account.php');
-
+require_once('Schedule.php');
 /***************************************
 *
 * StudentAccount extends account and represents
@@ -18,13 +18,31 @@ require_once('Account.php');
 
 Class StudentAccount extends Account {
 
-	protected $schedule;
+	private $holds;
+	private $registrationStatus;
 
 	public function __construct(array $params) {
 		$this->username = $params['username'];
 		$this->name = $params['name'];
 		$this->pwd = $params['pwd'];
-		$this->permissions = STUDENT_PERMISSIONS;
+		$this->permission = STUDENT_PERMISSIONS;
 	}
+
+	public function getHolds() {
+		return $this->holds;
+	}
+
+	public function setHolds($hold) {
+		$this->holds = $hold;
+	}
+
+	public function getRegistrationStatus() {
+		return $this->registrationStatus;
+	}
+
+	public function setRegistrationStatus($status) {
+		$this->registrationStatus = $status;
+	}
+
 }
 ?>

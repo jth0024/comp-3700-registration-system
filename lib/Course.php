@@ -57,4 +57,8 @@ Class Course {
 		return $name;
 	}
 
+	public function toJSON() {
+		return json_encode(array('name' => $this->name, 'roster' => $this->roster, 'instructor' => $this->instructor));
+	}
+
 }

@@ -55,7 +55,8 @@ Class AccountManager {
 	}
 
 	public function newAccount(array $params) {
-		switch($params['permissions']) {
+			print_r($params);
+		switch($params['permission']) {
 			case NO_PERMISSIONS: 
 			break;
 			case STUDENT_PERMISSIONS: 

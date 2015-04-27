@@ -22,7 +22,7 @@ Class AdministratorAccount extends Account {
 		$this->username = $params['username'];
 		$this->name = $params['name'];
 		$this->pwd = $params['pwd'];
-		$this->permissions = ADMINISTRATOR_PERMISSIONS;
+		$this->permission = ADMINISTRATOR_PERMISSIONS;
 	}
 
 }
