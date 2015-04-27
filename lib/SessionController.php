@@ -37,7 +37,7 @@ Class SessionController {
 			$result = array('username' => $curAccount->getUsername(), 'name' => $curAccount->getName(), 'permission' => $curAccount->getPermissions());
 			return $this->prep($result);
 		}
-		else return null;
+		else return json_encode(array('error' => array('msg' => 'Invalid Credentials'), true));
 	}
 
 	public function listCourses() {

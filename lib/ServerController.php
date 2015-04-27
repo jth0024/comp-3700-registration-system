@@ -18,11 +18,11 @@ Class ServerController {
 		if($params['pwd'] == $curAccount->getPassword()) {
 			return $curAccount->toJSON();
 		}
-		else return null;
+		else return json_encode(array('error' => array('msg' => 'Invalid Credentials'), true));
 	}
 
 	public function listCourses() {
-		$courseList = $this->db-getCourses();
+		$courseList = $this->db->getCourses();
 		return $courseList;
 	}
 

@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 require_once('ServerController.php');
 
-$data = json_decode($_REQUEST['message'], true);
+$data = json_decode($_REQUEST['requ'], true);
 
 //$data = array('request_type' => 'list_courses');
 
