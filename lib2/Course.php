@@ -37,14 +37,19 @@ Class Course {
 
 	public function addStudent($student) {
 		$this->roster[] = $student;
+		$this->numEnrolled = sizeof($this->roster);
 	}
 
 	public function removeStudent($student) {
 		$i = 0;
+		echo sizeof($this->roster);
 		foreach ($this->roster as $stu) {
-			if($stu->getUsername() == $student->getUsername()) unset($roster[$i]);
+			echo $stu->getUsername() . " " . $student;
+			if($stu->getUsername() == $student) unset($this->roster[$i]); 
 			$i++;
 		}
+		echo sizeof($this->roster);
+		$this->numEnrolled = sizeof($this->roster);
 	}
 
 	public function getRoster() {
@@ -99,7 +104,6 @@ Class Course {
 		$tempRoster = array();
 		foreach($this->roster as $student) $tempRoster[] = $student->getUsername();
 		$stringRoster = implode(",", $tempRoster);
-		echo $stringRoster;
 		return array('id' => $this->ID, 'name' => $this->name,  
 			'roster' => $stringRoster, 'instructor' => $this->instructor->getUsername(), 'capacity' => $this->capacity,
 			'numEnrolled' => $this->numEnrolled, 'day' => $this->day, 'startTime' => $this->startTime);
