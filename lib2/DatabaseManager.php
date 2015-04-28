@@ -44,8 +44,8 @@ Class DatabaseManager {
 			case STUDENT_PERMISSION:
 				$account = new StudentAccount($params);
 			break;
-			case TEACHER_PERMISSION:
-				$account = new TeacherAccount($params);
+			case INSTRUCTOR_PERMISSION:
+				$account = new InstructorAccount($params);
 			break;
 			case NO_PERMISSION:
 				$account = new Account($params);
@@ -58,11 +58,6 @@ Class DatabaseManager {
 		$temp = $account->toArray();
 		return $this->update(ACCOUNTS_TABLE, $temp,  "username = '" . $temp['username'] . "'");
 	}
-
-		//get the schedule w/ account id
-		//loop through schedule and remove the student from the courses
-		//remove the schedule for the student
-		//Remove the account
 
 	public function deleteAccount($accountID) {
 		return $this->delete(ACCOUNTS_TABLE, "username = '" . $accountID . "'");

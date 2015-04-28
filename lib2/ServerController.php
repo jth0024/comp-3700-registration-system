@@ -63,9 +63,11 @@ Class ServerController {
 			$schedule = $this->db->getSchedule($username);
 			$courseList = $schedule->getCourseList();
 			foreach ($courseList as $course) {
-				$course->setInstructor("TBA");
+				$temp = new Account(array('username'=>"TBA"));
+				$course->setInstructor($temp);
 				$this->db->updateCourse($course);
 			}
+			$this->db->deleteSchedule($username);
 		}
 		$this->db->deleteAccount($username);
 	}
@@ -149,10 +151,25 @@ Class ServerController {
 	}
 
 	public function addInstructorToCourse($username, $courseID) {
+		$instructor = $this->db->getAccount($username);
+		$course = $this->db->getCourse($courseID);
+		$course->setInstructor($instructor);
+		$instructorSchedule = $this->db->getSchedule($instructor->getUsername());
+		$instructorSchedule->addToCourseList($course);
+		$this->db->updateCourse($course);
+		$this->db->updateSchedule($instructorSchedule);
 
 	}
 
 	public function removeInstructorFromCourse($courseID) {
+		$course = $this->db->getCourse($courseID);
+		$instructor = $course->getInstructor();
+		$account = new Account(array('username'=>'TBA'));
+		$course->setInstructor($account);
+		$instructorSchedule = $this->db->getSchedule($instructor->getUsername());
+		$instructorSchedule->removeFromCourseList($courseID);
+		$this->db->updateCourse($course);
+		$this->db->updateSchedule($instructorSchedule);
 		
 	}
 

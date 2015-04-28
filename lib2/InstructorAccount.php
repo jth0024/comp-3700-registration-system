@@ -22,7 +22,7 @@ Class InstructorAccount extends Account {
 		$this->username = $params['username'];
 		$this->name = $params['name'];
 		$this->password = $params['password'];
-		$this->permission = INSTRUCTOR_ACCOUNT;
+		$this->permission = INSTRUCTOR_PERMISSION;
 	}
 
 }
