@@ -1,7 +1,7 @@
 <?php
 require_once('AdministratorAccount.php');
 require_once('StudentAccount.php');
-require_once('TeacherAccount.php');
+require_once('InstructorAccount.php');
 require_once('Course.php');
 require_once('Schedule.php');
 
@@ -21,7 +21,7 @@ require_once('Schedule.php');
 *
 ***************************************/
 
-Class DbHelper {
+Class DatabaseManager {
   	
   	// Variable holding the connection to the database
   	protected	$_con=null;
@@ -56,7 +56,7 @@ Class DbHelper {
 
 	public function updateAccount($account) {
 		$temp = $account->toArray();
-		return $this->update(ACCOUNTS_TABLE, $temp, array('username' => $temp['username']));
+		return $this->update(ACCOUNTS_TABLE, $temp,  "username = '" . $temp['username'] . "'");
 	}
 
 		//get the schedule w/ account id
@@ -65,7 +65,7 @@ Class DbHelper {
 		//Remove the account
 
 	public function deleteAccount($accountID) {
-		return $this->delete(ACCOUNTS_TABLE, array('username' => $accountID));
+		return $this->delete(ACCOUNTS_TABLE, "username = '" . $accountID . "'");
 	}
 
 	public function getAllAccounts() {
@@ -77,7 +77,15 @@ Class DbHelper {
 	}
 
 	public function getCourse($courseID) {
-		return $this->get(COURSES_TABLE, array('id' => $courseID));
+		$courseArray = $this->get(COURSES_TABLE, array('id' => $courseID));
+		$stringRoster = $courseArray['courseList'];
+		$rosterTemp = explode(",", $stringRoster);
+		$roster = array();
+		foreach($rosterTemp as $studentID) $roster[] = $this->getAccount($studentID);
+		$instructor = $this->getAccount($courseArray['instructor']);
+		$params = array('id' => $courseArray['id'], 'name' => $courseArray['name'], 'capacity' => $courseArray['capacity'], 'numEnrolled' => $courseArray['numEnrolled'], 'instructor' => $instructor, 'roster' => $roster);
+		return new Course($params);
+
 	}
 
 	public function updateCourse($course) {
@@ -86,7 +94,7 @@ Class DbHelper {
 	}
 
 	public function deleteCourse($courseID) {
-		return $this->delete(COURSES_TABLE, array('id' => $courseID));
+		return $this->delete(COURSES_TABLE, "id = '" . $courseID . "'");
 	}
 
 	public function getAllCourses() {
@@ -95,6 +103,20 @@ Class DbHelper {
 
 	public function insertCourse($course) {
 		return $this->insert(COURSES_TABLE, $course->toArray());
+	}
+
+	public function insertSchedule($schedule) {
+		return $this->insert(SCHEDULE_TABLE, $schedule->toArray());
+	}
+
+	public function getSchedule($username) {
+		$params = $this->get(SCHEDULE_TABLE, array('username' => $username));
+		$stringCourseList = explode(",", $params['classList']);
+		$courseList = array();
+		foreach($stringCourseList as $id) $courseList[] = $this->getCourse($id);
+		$params = array('username' => $username, 'courseList' => $courseList);
+		$schedule = new Schedule($params);
+		return $schedule;
 	}
 
 
@@ -163,7 +185,7 @@ Class DbHelper {
 		if ($this->_recordset = mysqli_query($this->_con,$query)) {
 			return $this->_recordset;
 		} else {
-			die("Error in executing query... :: ".$query." <br/>".mysqli_error($this->_con));
+			die(json_encode(array('error' => array('msg' => mysqli_error($this->_con))), true));
 		}
 	}
   

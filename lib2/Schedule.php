@@ -17,10 +17,14 @@ Class Schedule {
 
 	private $username;
 	private $courseList;
+	private $numCourses;
+	private $maxNumCourses;
 
 	public function __construct(array $params) {
 		$this->username = $params['username'];
 		$this->courseList = $params['courseList'];
+		$this->numCourses = $params['numCourses'];
+		$this->maxNumCourses = $params['maxNumCourses'];
 	}
 
 	public function getUsername() {
@@ -31,12 +35,29 @@ Class Schedule {
 		$this->username = $newName;
 	}
 
+	public function getNumCourses() {
+		return $this->numCourses;
+	}
+
+	public function setNumCourses($newNumCourses) {
+		$this->numCourses = $newNumCourses;
+	}
+
+	public function getMaxNumCourses() {
+		return $this->maxNumCourses;
+	}
+
+	public function setMaxNumCourses($newNumCourses) {
+		$this->maxNumCourses = $newNumCourses;
+	}
+
 	public function getCourseList() {
 		return $this->courseList;
 	}
 
 	public function addToCourseList($course) {
 		$this->courseList[] = $course;
+		$this->numCourses = intval($this->numCourses) + 1;
 	}
 
 	public function removeFromCourseList($removeCourse) {
@@ -47,6 +68,16 @@ Class Schedule {
 			}
 			$i++;
 		}
+		$this->numCourses = intval($this->numCourses) - 1;
+	}
+
+	public function toArray() {
+		$courseListTemp = array();
+		foreach ($this->courseList as $course) {
+			$courseListTemp[] = $course->getID();
+		}
+		return array('username' => $this->username, 'courseList' => implode(",", $courseListTemp), 
+			'numCourses' => $this->numCourses, 'maxNumCourses' => $this->maxNumCourses);
 	}
 
 }

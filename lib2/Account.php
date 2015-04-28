@@ -25,7 +25,7 @@ Class Account {
 	public function __construct(array $params) {
 		$this->username = $params['username'];
 		$this->name = $params['name'];
-		$this->pwd = $params['password'];
+		$this->password = $params['password'];
 		$this->permission = NO_PERMISSION;
 	}
 
@@ -60,7 +60,6 @@ Class Account {
 	public function setPassword($newPwd) {
 		$this->password = sha1($params($newPwd));
 	}
-
 
 	public function toArray() {
 		return array('username' => $this->username, 'name' => $this->name,  

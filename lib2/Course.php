@@ -15,18 +15,21 @@
 
 Class Course {
 
-	protected $name;
-	protected $roster;
-	protected $instructor;
-	protected $capacity;
-	protected $ID;
+	protected $name; // string
+	protected $roster; // Array of student objects
+	protected $instructor; // instructor object
+	protected $capacity; // int
+	protected $numEnrolled; // int
+	protected $id; // int/string
 
 	public function __construct(array $params) {
 		$this->name = $params['name'];
 		$this->roster = $params['roster'];
 		$this->instructor = $params['instructor'];
 		$this->capacity = $params['capacity'];
-		$this->ID = $params['ID'];
+		$this->numEnrolled = $params['numEnrolled'];
+		$this->ID = $params['id'];
+		print_r($this->roster);
 	}
 
 	public function addStudent($student) {
@@ -53,6 +56,10 @@ Class Course {
 		return $this->instructor;
 	}
 
+	public function removeInstructor() {
+		$this->instructor = null;
+	}
+
 	public function setName($newName) {
 		$this->name = $newName;
 	}
@@ -70,8 +77,13 @@ Class Course {
 	}
 
 	public function toArray() {
+		$tempRoster = array();
+		foreach($this->roster as $student) $tempRoster[] = $student->getUsername();
+		$stringRoster = implode(",", $tempRoster);
+		echo $stringRoster;
 		return array('id' => $this->ID, 'name' => $this->name,  
-			'roster' => $this->roster, 'permission' => $this->permission);
+			'roster' => $stringRoster, 'instructor' => $this->instructor->getUsername(), 'capacity' => $this->capacity,
+			'numEnrolled' => $this->numEnrolled);
 	}
 
 }
