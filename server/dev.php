@@ -17,15 +17,15 @@ $data = array('request_type' => 'create_account', 'username' => 'instructor10', 
 
 //$data = array('request_type' => 'update_account', 'username' => 'student5', 'password' => 'password', 'permission' => 'instructor', 'name' => 'Test');
 
-//$data = array('request_type' => 'create_course', 'name' => 'Comp3100', 'instructor' => 'instructor10', 'capacity' => '30', 'roster' => array(), 'day' => 'TR', 'startTime' => '9:00:00');
+//$data = array('request_type' => 'create_course', 'name' => 'Comp3100', 'instructor' => 'instructor10', 'capacity' => '30', 'roster' => array(), 'day' => 'MWF', 'startTime' => '9:00:00');
 
 //$data = array('request_type' => 'remove_course', 'courseID' => '2');
 
 //$data = array('request_type' => 'add_student_to_course', 'courseID' => '2', 'username' => "student5");
 
-$data = array('request_type' => 'add_instructor_to_course', 'courseID' => '4', 'username' => "instructor10");
+//$data = array('request_type' => 'add_instructor_to_course', 'courseID' => '4', 'username' => "instructor10");
 
-$data = array('request_type' => 'remove_instructor_from_course', 'courseID' => '4', 'username' => "instructor10");
+$data = array('request_type' => 'get_schedule', 'username' => 'instructor10');
 
 //$data = array('request_type' => 'delete_account', 'username' => 'instructor10');
 

@@ -170,11 +170,14 @@ Class ServerController {
 		$instructorSchedule->removeFromCourseList($courseID);
 		$this->db->updateCourse($course);
 		$this->db->updateSchedule($instructorSchedule);
-		
 	}
 
 	public function getSchedule($username) {
-		return $this->db->getSchedule($username);
+		return json_encode($this->db->getSchedule($username)->toArray(), true);
+	}
+
+	public function getAllCourses() {
+		return json_encode($this->db->getAllCourses(), true);
 	}
 
 }

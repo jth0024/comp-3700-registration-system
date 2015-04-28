@@ -62,7 +62,6 @@ Class Schedule {
 
 	public function removeFromCourseList($deleteCourse) {
 		$i = 0;
-		print_r($this->toArray());
 		foreach($this->courseList as $course) {
 			if($course->getID() == $deleteCourse) {
 				unset($this->courseList[$i]);
