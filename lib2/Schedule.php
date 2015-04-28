@@ -60,10 +60,10 @@ Class Schedule {
 		$this->numCourses = intval($this->numCourses) + 1;
 	}
 
-	public function removeFromCourseList($removeCourse) {
+	public function removeFromCourseList($deleteCourse) {
 		$i = 0;
 		foreach($this->courseList as $course) {
-			if($course->getID() == $removeCourse->getID()) {
+			if($course->getID() == $deleteCourse) {
 				unset($this->courseList[$i]);
 			}
 			$i++;

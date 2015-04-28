@@ -51,10 +51,23 @@ Class ServerController {
 	}
 
 	public function deleteAccount($username) {
-		//TODO: Delete Account from courses
+		if($this->db->getAccount($username)->getPermission() == STUDENT_PERMISSION) {
+			$schedule = $this->db->getSchedule($username);
+			$courseList = $schedule->getCourseList();
+			foreach ($courseList as $course) {
+				$course->removeStudent($username);
+				$this->db->updateCourse($course);
+			}
+			$this->db->deleteSchedule($username);
+		} else if($this->db->getAccount($username)->getPermission() == INSTRUCTOR_PERMISSION) {
+			$schedule = $this->db->getSchedule($username);
+			$courseList = $schedule->getCourseList();
+			foreach ($courseList as $course) {
+				$course->setInstructor("TBA");
+				$this->db->updateCourse($course);
+			}
+		}
 		$this->db->deleteAccount($username);
-		$this->db->deleteSchedule($username);
-		//TODO: Something with teacher's courses..?
 	}
 
 	public function getAllAccounts() {
@@ -92,24 +105,47 @@ Class ServerController {
 		foreach($params['roster'] as $student) $roster[] = $this->db->getAccount($student);
 		$course = new Course(array('instructor' => $instructor, 'name' => $name, 'day' => $day, 'startTime' => $startTime, 'capacity' => $capacity, 'numEnrolled' => $numEnrolled, 'roster' => $roster));
 		$this->db->insertCourse($course);
+		$courses = $this->db->getAllCourses();
+		$courseID = "";
+		foreach($courses as $course) {
+			if($course['name'] == $name && $course['instructor'] == $instructor->getUsername() && $course['day'] == $day && $course['time'] == $time)
+				$courseID = $course['id'];
+		}
+		$schedule = $this->db->getSchedule($instructor->getUsername());
+		$schedule->addToCourseList($this->db->getCourse($courseID));
+		$this->db->updateSchedule($schedule);
 	}
 
-	public function removeCourse($courseID) {
-		// TODO: GET ARRAY OF STUDENTS IN COURSE AND REMOVE COURSE FROM THEIR SCHEDULES.
+	public function deleteCourse($courseID) {
+		$course = $this->db->getCourse($courseID);
+
+		$instructorid = $course->getInstructor()->getUsername();
+		$schedule = $this->db->getSchedule($instructorid);
+		$schedule->removeFromCourseList($courseID);
+		$this->db->updateSchedule($schedule);
+
+		$roster = $course->getRoster();
+		foreach ($roster as $student) {
+			$schedule = $this->db->getSchedule($student->getUsername());
+			$schedule->removeFromCourseList($courseID);
+			$this->db->updateSchedule($schedule);
+		}
+
 		$this->db->deleteCourse($courseID);
 	}
 
 	public function addStudentToCourse($username, $courseID) {
 		$schedule = $this->db->getSchedule($username);
-		print_r($schedule->getCourseList());
 		$course = $this->db->getCourse($courseID);
 		$course->addStudent($this->db->getAccount($username));
 		$schedule->addToCourseList($course);
-		print_r($schedule->getCourseList());
+		$this->db->updateCourse($course);
+		$this->db->updateSchedule($schedule);
 	}
 
 	public function removeStudentFromCourse($username, $courseID) {
-		
+		$course = $this->db->getCourse($courseID);
+		$course->removeStudent($username);
 	}
 
 	public function addInstructorToCourse($username, $courseID) {

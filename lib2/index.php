@@ -38,7 +38,7 @@ switch($data['request_type']) {
 	break;
 	case "remove_course":
 		unset($data['request_type']);
-		echo $server_controller->removeCourse($data['courseID']);
+		echo $server_controller->deleteCourse($data['courseID']);
 	break;
 	case "add_student_to_course":
 		echo $server_controller->addStudentToCourse($data['username'], $data['courseID']);

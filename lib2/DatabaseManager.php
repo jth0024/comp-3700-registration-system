@@ -78,10 +78,12 @@ Class DatabaseManager {
 
 	public function getCourse($courseID) {
 		$courseArray = $this->get(COURSES_TABLE, array('id' => $courseID));
-		$stringRoster = $courseArray['courseList'];
+		$stringRoster = $courseArray['roster'];
 		$rosterTemp = explode(",", $stringRoster);
 		$roster = array();
-		foreach($rosterTemp as $studentID) $roster[] = $this->getAccount($studentID);
+		foreach($rosterTemp as $studentID) {
+			if($studentID != "") $roster[] = $this->getAccount($studentID);
+		}
 		$instructor = $this->getAccount($courseArray['instructor']);
 		$params = array('id' => $courseArray['id'], 'name' => $courseArray['name'], 'day' => $courseArray['day'], 'startTime' => $courseArray['startTime'], 'capacity' => $courseArray['capacity'], 'numEnrolled' => $courseArray['numEnrolled'], 'instructor' => $instructor, 'roster' => $roster);
 		return new Course($params);
@@ -90,7 +92,7 @@ Class DatabaseManager {
 
 	public function updateCourse($course) {
 		$temp = $course->toArray();
-		return $this->update(COURSES_TABLE, $temp, array('id' => $temp['id']));
+		return $this->update(COURSES_TABLE, $temp, "id = '" . $temp['id'] . "'");
 	}
 
 	public function deleteCourse($courseID) {
@@ -109,16 +111,20 @@ Class DatabaseManager {
 		return $this->insert(SCHEDULE_TABLE, $schedule->toArray());
 	}
 
+	public function updateSchedule($schedule) {
+		$temp = $schedule->toArray();
+		return $this->update(SCHEDULE_TABLE, $temp, "username = '" . $temp['username'] . "'");	}
+
 	public function deleteSchedule($username) {
 		return $this->delete(SCHEDULE_TABLE, "username = '" . $username . "'");
 	}
 
 	public function getSchedule($username) {
 		$params = $this->get(SCHEDULE_TABLE, array('username' => $username));
-		$stringCourseList = explode(",", $params['classList']);
+		$stringCourseList = explode(",", $params['courseList']);
 		$courseList = array();
-		foreach($stringCourseList as $id) $courseList[] = $this->getCourse($id);
-		$params = array('username' => $username, 'courseList' => $courseList);
+		foreach($stringCourseList as $id) if($id != "") $courseList[] = $this->getCourse($id);
+		$params = array('username' => $username, 'courseList' => $courseList, 'numCourses' => $params['numCourses'], 'maxNumCourses' => $params['maxNumCourses']);
 		$schedule = new Schedule($params);
 		return $schedule;
 	}

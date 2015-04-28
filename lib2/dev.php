@@ -7,21 +7,21 @@ require_once('ServerController.php');
 
 $data = json_decode($_REQUEST['message'], true);
 
-//$data = array('request_type' => 'log_in', 'username' => 'student5', 'password' => 'password');
+$data = array('request_type' => 'log_in', 'username' => 'student5', 'password' => 'password');
 
 //$data = array('request_type' => 'create_account', 'username' => 'student5', 'password' => 'password', 'permission' => 'student', 'name' => 'Sample Student', 'holds' => 'false', 'registrationStatus' => 'Junior');
-
-//$data = array('request_type' => 'delete_account', 'username' => 'student5');
 
 //$data = array('request_type' => 'get_all_accounts');
 
 //$data = array('request_type' => 'update_account', 'username' => 'student5', 'password' => 'password', 'permission' => 'instructor', 'name' => 'Test');
 
-//$data = array('request_type' => 'create_course', 'name' => 'Comp3100', 'instructor' => 'instructor10', 'capacity' => '30', 'roster' => array(), 'day' => 'TR', 'startTime' => '9:00:00');
+$data = array('request_type' => 'create_course', 'name' => 'Comp3100', 'instructor' => 'instructor10', 'capacity' => '30', 'roster' => array(), 'day' => 'TR', 'startTime' => '9:00:00');
 
 //$data = array('request_type' => 'remove_course', 'courseID' => '5');
 
-$data = array('request_type' => 'add_student_to_course', 'courseID' => '4', 'username' => "student5");
+$data = array('request_type' => 'add_student_to_course', 'courseID' => '5', 'username' => "student5");
+
+//$data = array('request_type' => 'delete_account', 'username' => 'student5');
 
 if(!$data['request_type']) {
 	echo json_encode(array('error' => array('msg' => 'No Request Type - ' . print_r($data))));
@@ -54,7 +54,7 @@ switch($data['request_type']) {
 	break;
 	case "remove_course":
 		unset($data['request_type']);
-		echo $server_controller->removeCourse($data['courseID']);
+		echo $server_controller->deleteCourse($data['courseID']);
 	break;
 	case "add_student_to_course":
 		echo $server_controller->addStudentToCourse($data['username'], $data['courseID']);
