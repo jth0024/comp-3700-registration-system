@@ -55,6 +55,9 @@ switch($data['request_type']) {
 	case "get_schedule":
 		echo $server_controller->getSchedule($data['username']);
 	break;
+	case "get_all_courses":
+		echo $server_controller->getAllCourses();
+	break;
 	default: 
 		echo json_encode(array('error' => array('msg' => 'Incorrect or Unfound Request Type - ' . $data['request_type'])));
 	break;

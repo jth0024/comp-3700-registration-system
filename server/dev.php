@@ -25,9 +25,11 @@ $data = array('request_type' => 'create_account', 'username' => 'instructor10', 
 
 //$data = array('request_type' => 'add_instructor_to_course', 'courseID' => '4', 'username' => "instructor10");
 
-$data = array('request_type' => 'get_schedule', 'username' => 'instructor10');
+//$data = array('request_type' => 'get_schedule', 'username' => 'instructor10');
 
 //$data = array('request_type' => 'delete_account', 'username' => 'instructor10');
+
+$data = array('request_type' => 'get_all_courses');
 
 if(!$data['request_type']) {
 	echo json_encode(array('error' => array('msg' => 'No Request Type - ' . print_r($data))));
@@ -76,6 +78,9 @@ switch($data['request_type']) {
 	break;
 	case "get_schedule":
 		echo $server_controller->getSchedule($data['username']);
+	break;
+	case "get_all_courses":
+		echo $server_controller->getAllCourses();
 	break;
 	default: 
 		echo json_encode(array('error' => array('msg' => 'Incorrect or Unfound Request Type - ' . $data['request_type'])));
