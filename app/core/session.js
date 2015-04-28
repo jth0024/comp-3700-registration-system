@@ -7,20 +7,41 @@
 
 
     function session() {
-
         this.create = create;
         this.destroy = destroy;
+        this.authenticate = authenticate;
+        this.unAuthenticate = unAuthenticate;
+        this.isAuthenticated = isAuthenticated;
+        this.isAuthorized = isAuthorized;
 
-        function create(name, username, permission) {
-            this.name = name;
-            this.accountId = username;
-            this.permission = permission;
+        function create() {
+            this.authenticated = false;
         }
 
         function destroy() {
-            this.name = null;
-            this.accountId = null;
-            this.permission = null;
+            this.currentAccount = null;
+            this.authenticated = null;
+        }
+
+        function authenticate(account) {
+            this.currentAccount = account;
+            this.authenticated = true;
+        }
+
+        function unAuthenticate() {
+            this.currentAccount = null;
+            this.authenticated = false;
+        }
+
+        function isAuthenticated() {
+            return !!this.authenticated;
+        }
+
+        function isAuthorized(authorizedPermissions) {
+            if (!angular.isArray(authorizedPermissions)) {
+                authorizedPermissions = [authorizedPermissions];
+            }
+            return (this.isAuthenticated() && authorizedPermissions.indexOf(this.currentAccount.permission) !== -1);
         }
 
     }

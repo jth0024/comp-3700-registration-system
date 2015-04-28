@@ -13,9 +13,7 @@
         activate();
 
         function activate() {
-            if($scope.global.currentAccount) {
-                vm.courses = httpservice.getCoursesCatalog();
-            }            
+            vm.courses = httpservice.getCoursesCatalog();          
         }
 
     }

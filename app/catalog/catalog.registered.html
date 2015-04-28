@@ -4,7 +4,7 @@
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3>Registered Courses</h3>
+			<h3>Registered Courses<button data-ng-click="vm.refresh()" class="btn btn-default back-button pull-right">Refresh</button></h3>
 		</div>
 		<div class="panel-body">
 			<table class="table table-striped">
@@ -23,23 +23,10 @@
 						<td><span data-ng-repeat="day in course.days track by $index">{{day}}</span></td>
 						<td><span data-ng-repeat="time in course.time track by $index">{{time}}</span></td>
 						<td>{{course.instructor}}</td>
-						<td><button class="btn btn-danger">Drop</button></td>
+						<td><button data-ng-click="vm.dropCourse(course.id)" class="btn btn-danger">Drop</button></td>
 					</tr>
 				</tbody>
 			</table>
-		</div>
-	</div>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3>Add Courses</h3>
-		</div>
-		<div class="panel-body">
-			<div class="row">
-			<div class="input-group col-sm-4 col-sm-offset-4">
-				<input type="text" class="form-control" placeholder="Type course id...">
-				<span class="input-group-btn"><button class="btn btn-primary" type="button">Add</button></span>
-			</div><!-- /input-group -->
-			</div><!--row-->
 		</div>
 	</div>
 	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>

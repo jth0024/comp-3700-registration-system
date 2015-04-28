@@ -11,12 +11,15 @@
         	student: 'student'
         })
         .constant('AUTH_EVENTS', {
-        	loginSuccess: 'auth-login-success',
-        	loginFailed: 'auth-login-failed',
-        	logoutSuccess: 'auth-logout-success',
+        	loginRequest: 'auth-login-request',
+            logoutRequest: 'auth-logout-request',
         	sessionTimeout: 'auth-session-timeout',
         	notAuthenticated: 'auth-not-authenticated',
-        	notAuthorized: 'auth-not-authorized'
+        	notAuthorized: 'auth-not-authorized',
+            unknownError: 'auth-error-404'
+        })
+        .constant('REQUEST_EVENTS', {
+            dropCourseRequest: 'request-drop-course'
         });
 
 

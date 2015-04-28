@@ -10,10 +10,7 @@
         var service = {
             getCoursesCatalog: getCoursesCatalog,
             getSchedule: getSchedule,
-            login: login,
-            isAuthenticated: isAuthenticated,
-            isAuthorized: isAuthorized,
-            logout: logout
+            login: login
         };
 
         return service;
@@ -30,25 +27,29 @@
                     title: 'Renewable Energy',
                     instructor: 'Bhavnani',
                     time: ['9:30', '10:45'],
-                    days: ['T','R']
+                    days: ['T','R'],
+                    id: 1
                 },
                 {
                     title: 'Software Modeling',
                     instructor: 'Yilmaz',
                     time: ['12:30', '1:45'],
-                    days: ['T','R']
+                    days: ['T','R'],
+                    id: 2
                 },
                 {
                     title: 'Algorithms',
                     instructor: 'Chapman',
                     time: ['2:00', '3:15'],
-                    days: ['T','R']
+                    days: ['T','R'],
+                    id: 3
                 },
                 {
                     title: 'HVAC',
                     instructor: 'Dyer',
                     time: ['11:00', '12:15'],
-                    days: ['T','R']
+                    days: ['T','R'],
+                    id: 4
                 }
             ];
             return courses;
@@ -65,25 +66,29 @@
                     title: 'Renewable Energy',
                     instructor: 'Bhavnani',
                     time: ['9:30', '10:45'],
-                    days: ['T','R']
+                    days: ['T','R'],
+                    id: 1
                 },
                 {
                     title: 'Software Modeling',
                     instructor: 'Yilmaz',
                     time: ['12:30', '1:45'],
-                    days: ['T','R']
+                    days: ['T','R'],
+                    id: 2
                 },
                 {
                     title: 'Algorithms',
                     instructor: 'Chapman',
                     time: ['2:00', '3:15'],
-                    days: ['T','R']
+                    days: ['T','R'],
+                    id: 3
                 },
                 {
                     title: 'HVAC',
                     instructor: 'Dyer',
                     time: ['11:00', '12:15'],
-                    days: ['T','R']
+                    days: ['T','R'],
+                    id: 4
                 }
             ];
             return schedule;
@@ -91,7 +96,7 @@
 
         function login(credentials) {
             
-            var requestUrl = 'http://sasbartlett.com/comp3700/lib/index.php';
+            var requestUrl = 'http://sasbartlett.com/comp3700/lib2/index.php';
             var message = {
                 request_type: 'log_in',
                 username: credentials.username,
@@ -110,21 +115,6 @@
                     console.log(response);
                     return response.data;
                 });
-        }
-
-        function logout() {
-            session.destroy();
-        }
-
-        function isAuthenticated() {
-            return !!session.accountId;
-        }
-
-        function isAuthorized(authorizedRoles) {
-            if (!angular.isArray(authorizedRoles)) {
-                authorizedRoles = [authorizedRoles];
-            }
-            return (isAuthenticated() && authorizedRoles.indexOf(session.permission) !== -1);
         }
 
     }

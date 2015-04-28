@@ -1,8 +1,8 @@
-<div data-ng-if="global.currentAccount" >
+<div data-ng-if="global.currentSession.authenticated" >
 	<div class="page-header">
-		<h1>Welcome, {{ global.currentAccount.name }}!</h1>
+		<h1>Welcome, {{ global.currentSession.currentAccount.name }}!</h1>
 	</div>
-	<div data-ng-if="global.permissionTypes.admin == global.currentAccount.permission" class="panel panel-default">
+	<div data-ng-if="global.permissionTypes.admin == global.currentSession.currentAccount.permission" class="panel panel-default">
 		<div class="panel-heading">
 			<h3>Administrator Resource Links</h3>
 		</div>
@@ -15,7 +15,7 @@
 			</ul>
 		</div>
 	</div>
-	<div data-ng-if="global.permissionTypes.instructor == global.currentAccount.permission" class="panel panel-default">
+	<div data-ng-if="global.permissionTypes.instructor == global.currentSession.currentAccount.permission" class="panel panel-default">
 		<div class="panel-heading" >
 			<h3>Instructor Resource Links</h3>
 		</div>
@@ -25,16 +25,16 @@
 			</ul>
 		</div>
 	</div>
-	<div data-ng-if="global.permissionTypes.student == global.currentAccount.permission" class="panel panel-default">
+	<div data-ng-if="global.permissionTypes.student == global.currentSession.currentAccount.permission" class="panel panel-default">
 		<div class="panel-heading">
 			<h3>Student Resource Links</h3>
 		</div>
 		<div class="panel-body">
 			<ul class="list-group">
-				<li class="list-group-item"><a ui-sref="#">View Registration Status</a></li>
-				<li class="list-group-item"><a ui-sref="app.catalog">View Course Catalog</a></li>
-				<li class="list-group-item"><a ui-sref="app.schedule">View My Schedule</a></li>
-				<li class="list-group-item"><a ui-sref="app.editschedule">Add or Drop Courses</a></li>
+				<li class="list-group-item"><a ui-sref="#">Registration Status</a></li>
+				<li class="list-group-item"><a ui-sref="app.schedule">My Schedule</a></li>
+				<li class="list-group-item"><a ui-sref="app.catalog">Add Courses</a></li>
+				<li class="list-group-item"><a ui-sref="app.registered">Drop Courses</a></li>
 			</ul>
 		</div>
 	</div>

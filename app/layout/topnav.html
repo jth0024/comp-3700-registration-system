@@ -17,8 +17,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-right">
-        <li data-ng-if="global.currentAccount"><button class="btn btn-default username-button" ui-sref="app.dashboard">{{global.currentAccount.username}}</button></li>
-        <li data-ng-if="global.currentAccount"><button data-ng-click="vm.logout()" class="btn btn-danger">Logout</button></li>
+        <li data-ng-if="global.currentSession.authenticated">
+          <button class="btn btn-default username-button" ui-sref="app.dashboard">{{global.currentSession.currentAccount.username}}</button>
+        </li>
+        <li data-ng-if="global.currentSession.authenticated"><button data-ng-click="vm.logout()" class="btn btn-danger">Logout</button></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

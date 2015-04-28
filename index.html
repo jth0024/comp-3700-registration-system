@@ -25,6 +25,7 @@
     <script src="support/js/angular-route.min.js"></script>
     <script src="support/js/angular-sanitize.min.js"></script>
     <script src="support/js/angular-ui-router.min.js"></script>
+
     <script src="support/js/toastr.js"></script>
     <!-- endinject -->
 
@@ -32,14 +33,16 @@
     <!-- inject:js -->
     <!-- Bootstrapping -->
     <script src="app/app.module.js"></script>
-    <script src="app/app.route.js"></script>
-    <script src="app/app.global.js"></script>
+    <script src="app/app.run.js"></script>
+    <!--<script src="app/app.route.js"></script>-->
+    <script src="app/app.controller.js"></script>
 
 
     <!-- core module -->
     <script src="app/core/core.module.js"></script>
-    <script src="app/core/core.route.js"></script>
+    <!--<script src="app/core/core.route.js"></script>-->
     <script src="app/core/constants.js"></script>
+    <script src="app/core/routerhelper.js"></script>
     <script src="app/core/httpservice.js"></script>
     <script src="app/core/session.js"></script>
 
@@ -51,6 +54,7 @@
     <script src="app/catalog/catalog.module.js"></script>
     <script src="app/catalog/catalog.route.js"></script>
     <script src="app/catalog/catalog.js"></script>
+    <script src="app/catalog/catalog.registered.js"></script>
 
     <!-- dashboard -->
     <script src="app/dashboard/dashboard.module.js"></script>

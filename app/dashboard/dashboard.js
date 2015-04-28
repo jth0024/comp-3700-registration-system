@@ -11,9 +11,9 @@
         activate();
 
         function activate() {
-            if($scope.global.currentAccount) {
-              //vm.currentAccount = $scope.global.currentAccount; 
-            }
+            /*if($scope.global.currentAccount) {
+              vm.currentAccount = $scope.global.currentSession.currentAccount; 
+            }*/
             
         }
 

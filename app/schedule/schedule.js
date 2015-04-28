@@ -13,8 +13,8 @@
         activate();
 
         function activate() {
-            if($scope.global.currentAccount) {
-              vm.schedule = httpservice.getSchedule(vm.currentAccount);
+            if($scope.global.currentSession.isAuthenticated) {
+              vm.schedule = httpservice.getSchedule($scope.global.currentSession.currentAccount);
             }            
         }
 

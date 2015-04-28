@@ -5,7 +5,7 @@
         .module('app.layout')
         .controller('Topnav', Topnav);
 
-    function Topnav($scope, $rootScope, AUTH_EVENTS, httpservice) {
+    function Topnav($scope, $rootScope, AUTH_EVENTS, httpservice, session) {
         /*jshint validthis: true */
         var vm = this;
         vm.title = 'Tiger Registration System';
@@ -14,16 +14,15 @@
         activate();
 
         function activate() {
-            if($scope.global.currentAccount) {
-
-            }
+            vm.currentAccount = session.currentAccount;
+            vm.session = session;
         }
 
 
         function logout() {
-            httpservice.logout();
-            $scope.global.setCurrentAccount(null);
-            $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            //httpservice.logout();
+            //$scope.global.setCurrentAccount(null);
+            $rootScope.$broadcast(AUTH_EVENTS.logoutRequest);
         }
 
     }

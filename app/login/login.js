@@ -19,18 +19,13 @@
         function authenticate (credentials) {
 
             if (credentials) {
-                httpservice.login(credentials).then(function (response) {
-                        if (!!response.error) {
-                            $rootScope.$broadcast(AUTH_EVENTS.loginFailed, response);
-                        }
-                        else {
-                            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response); 
-                        }
-                        
-                        //console.log
+                /*httpservice.login(credentials).then(function (response) {
+                        $rootScope.$broadcast(AUTH_EVENTS.loginRequest, response);
                     }, function () {
-                      $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                    });         
+                      $rootScope.$broadcast(AUTH_EVENTS.unkownError);
+                    }); 
+                */
+                $rootScope.$broadcast(AUTH_EVENTS.loginRequest, credentials);
             }
 
         }
