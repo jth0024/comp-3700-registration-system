@@ -102,7 +102,10 @@ Class ServerController {
 	public function addStudentToCourse($username, $courseID) {
 		$schedule = $this->db->getSchedule($username);
 		print_r($schedule->getCourseList());
-		$schedule->addCourse()
+		$course = $this->db->getCourse($courseID);
+		$course->addStudent($this->db->getAccount($username));
+		$schedule->addToCourseList($course);
+		print_r($schedule->getCourseList());
 	}
 
 	public function removeStudentFromCourse($username, $courseID) {

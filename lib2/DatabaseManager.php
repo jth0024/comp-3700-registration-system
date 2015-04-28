@@ -36,7 +36,7 @@ Class DatabaseManager {
 
 	public function getAccount($id) {
 		$accountArray = $this->get(ACCOUNTS_TABLE, array('username' => $id));
-		$params = array('username' => $accountArray['username'], 'password' => $accountArray['password'], 'name' => $accountArray['name'], 'permission' => $accountArray['permission']);
+		$params = array('username' => $accountArray['username'], 'password' => $accountArray['password'], 'name' => $accountArray['name'], 'permission' => $accountArray['permission'], 'holds' => $accountArray['holds'], 'registrationStatus' => $accountArray['registrationStatus']);
 		switch($accountArray['permission']) {
 			case ADMINISTRATOR_PERMISSION:
 				$account = new AdministratorAccount($params);
