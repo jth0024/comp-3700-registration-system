@@ -51,9 +51,9 @@ Class ServerController {
 	}
 
 	public function deleteAccount($username) {
-		$this->db->deleteAccount($username);
-		//TODO: Delete Schedule
 		//TODO: Delete Account from courses
+		$this->db->deleteAccount($username);
+		$this->db->deleteSchedule($username);
 		//TODO: Something with teacher's courses..?
 	}
 
@@ -85,10 +85,12 @@ Class ServerController {
 		$instructor = $this->db->getAccount($params['instructor']);
 		$name = $params['name'];
 		$capacity = $params['capacity'];
+		$day = $params['day'];
+		$startTime = $params['startTime'];
 		$numEnrolled = 0;
 		$roster = array();
 		foreach($params['roster'] as $student) $roster[] = $this->db->getAccount($student);
-		$course = new Course(array('instructor' => $instructor, 'name' => $name, 'capacity' => $capacity, 'numEnrolled' => $numEnrolled, 'roster' => $roster));
+		$course = new Course(array('instructor' => $instructor, 'name' => $name, 'day' => $day, 'startTime' => $startTime, 'capacity' => $capacity, 'numEnrolled' => $numEnrolled, 'roster' => $roster));
 		$this->db->insertCourse($course);
 	}
 
@@ -98,11 +100,9 @@ Class ServerController {
 	}
 
 	public function addStudentToCourse($username, $courseID) {
-		//$course = $this->db->getCourse($courseID);
-		//$course->addStudent($this->db->getAccount($username));
-		//$this->db->updateCourse($course);
 		$schedule = $this->db->getSchedule($username);
-		echo $schedule->getUsername();
+		print_r($schedule->getCourseList());
+		$schedule->addCourse()
 	}
 
 	public function removeStudentFromCourse($username, $courseID) {

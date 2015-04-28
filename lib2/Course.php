@@ -21,6 +21,8 @@ Class Course {
 	protected $capacity; // int
 	protected $numEnrolled; // int
 	protected $id; // int/string
+	protected $day;
+	protected $startTime;
 
 	public function __construct(array $params) {
 		$this->name = $params['name'];
@@ -29,7 +31,8 @@ Class Course {
 		$this->capacity = $params['capacity'];
 		$this->numEnrolled = $params['numEnrolled'];
 		$this->ID = $params['id'];
-		print_r($this->roster);
+		$this->day = $params['day'];
+		$this->startTime = $params['startTime'];
 	}
 
 	public function addStudent($student) {
@@ -76,6 +79,22 @@ Class Course {
 		return $this->ID;
 	}
 
+	public function setDay($newDay) {
+		$this->day = $newDay;
+	}
+
+	public function getDay() {
+		return $this->day;
+	}
+
+	public function setTime($newTime) {
+		$this->Time = $newTime;
+	}
+
+	public function getTime() {
+		return $this->Time;
+	}
+
 	public function toArray() {
 		$tempRoster = array();
 		foreach($this->roster as $student) $tempRoster[] = $student->getUsername();
@@ -83,7 +102,7 @@ Class Course {
 		echo $stringRoster;
 		return array('id' => $this->ID, 'name' => $this->name,  
 			'roster' => $stringRoster, 'instructor' => $this->instructor->getUsername(), 'capacity' => $this->capacity,
-			'numEnrolled' => $this->numEnrolled);
+			'numEnrolled' => $this->numEnrolled, 'day' => $this->day, 'startTime' => $this->startTime);
 	}
 
 }

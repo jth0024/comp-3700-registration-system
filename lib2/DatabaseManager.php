@@ -83,7 +83,7 @@ Class DatabaseManager {
 		$roster = array();
 		foreach($rosterTemp as $studentID) $roster[] = $this->getAccount($studentID);
 		$instructor = $this->getAccount($courseArray['instructor']);
-		$params = array('id' => $courseArray['id'], 'name' => $courseArray['name'], 'capacity' => $courseArray['capacity'], 'numEnrolled' => $courseArray['numEnrolled'], 'instructor' => $instructor, 'roster' => $roster);
+		$params = array('id' => $courseArray['id'], 'name' => $courseArray['name'], 'day' => $courseArray['day'], 'startTime' => $courseArray['startTime'], 'capacity' => $courseArray['capacity'], 'numEnrolled' => $courseArray['numEnrolled'], 'instructor' => $instructor, 'roster' => $roster);
 		return new Course($params);
 
 	}
@@ -107,6 +107,10 @@ Class DatabaseManager {
 
 	public function insertSchedule($schedule) {
 		return $this->insert(SCHEDULE_TABLE, $schedule->toArray());
+	}
+
+	public function deleteSchedule($username) {
+		return $this->delete(SCHEDULE_TABLE, "username = '" . $username . "'");
 	}
 
 	public function getSchedule($username) {
