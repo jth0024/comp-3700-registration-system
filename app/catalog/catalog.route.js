@@ -23,24 +23,36 @@
     }*/
 
 
-    function appRun(routerHelper, PERMISSION_TYPES) {
+    function appRun(routerHelper, PERMISSION_TYPES, httpservice, session) {
         routerHelper.setRoutes([
             {
-                state: 'app.catalog',
+                state: 'app.courses',
                 config: {
-                    url: '/dashboard/catalog',
-                    templateUrl: 'app/catalog/catalog.html',
-                    controller: 'Catalog',
+                    resolve: {
+                        courses:  function(httpservice){
+                            // $http returns a promise for the url data
+                            return httpservice.getCoursesCatalog();
+                        }
+                    },
+                    url: '/dashboard/catalog/courses',
+                    templateUrl: 'app/catalog/catalog.courses.html',
+                    controller: 'Courses',
                     controllerAs: 'vm',
-                    title: 'catalog',
+                    title: 'courses',
                     data: {
-                        authorizedRoles: [PERMISSION_TYPES.admin, PERMISSION_TYPES.instructor, PERMISSION_TYPES.student]
+                        authorizedRoles: [PERMISSION_TYPES.admin, PERMISSION_TYPES.student]
                     }              
                 }
             },
             {
                 state: 'app.registered',
                 config: {
+                    resolve: {
+                        registeredCourses:  function(httpservice){
+                            // $http returns a promise for the url data
+                            return httpservice.getSchedule(session.currentAccount.username);
+                        }
+                    },
                     url: '/dashboard/catalog/registered',
                     templateUrl: 'app/catalog/catalog.registered.html',
                     controller: 'Registered',
@@ -49,6 +61,25 @@
                     data: {
                         authorizedRoles: [PERMISSION_TYPES.student]
                     }              
+                }
+            },
+            {
+                state: 'app.accounts',
+                config: {
+                    resolve: {
+                        accounts:  function(httpservice){
+                            // $http returns a promise for the url data
+                            return httpservice.getAccountsCatalog();
+                        }
+                    },
+                    url: '/dashboard/catalog/accounts',
+                    templateUrl: 'app/catalog/catalog.accounts.html',
+                    controller: 'Accounts',
+                    controllerAs: 'vm',
+                    title: 'accounts',
+                    data: {
+                        authorizedRoles: [PERMISSION_TYPES.admin]
+                    }             
                 }
             }
         ]); 

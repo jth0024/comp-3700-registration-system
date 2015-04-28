@@ -3,17 +3,16 @@
 
     angular
         .module('app.catalog')
-        .controller('Catalog', Catalog);
+        .controller('Accounts', Accounts);
         
 
-    function Catalog($scope, httpservice) {
+    function Accounts($rootScope, $scope, httpservice, REQUEST_EVENTS, accounts) {
         var vm = this;
-
 
         activate();
 
         function activate() {
-            vm.courses = httpservice.getCoursesCatalog();          
+            vm.accounts = accounts;     
         }
 
     }

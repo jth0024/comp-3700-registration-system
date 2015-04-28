@@ -18,7 +18,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li data-ng-if="global.currentSession.authenticated">
-          <button class="btn btn-default username-button" ui-sref="app.dashboard">{{global.currentSession.currentAccount.username}}</button>
+          <button class="btn btn-default username-button" ui-sref="app.dashboard">Home</button>
         </li>
         <li data-ng-if="global.currentSession.authenticated"><button data-ng-click="vm.logout()" class="btn btn-danger">Logout</button></li>
       </ul>

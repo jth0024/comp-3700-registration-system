@@ -1,0 +1,82 @@
+<div data-ng-if="global.currentSession.isAuthenticated" >
+	<div class="page-header">
+		<h1 data-ng-if="global.permissionTypes.student == global.currentSession.currentAccount.permission">Add Courses</h1>
+		<h1 data-ng-if="global.permissionTypes.admin == global.currentSession.currentAccount.permission">Manage Courses</h1>
+	</div>
+	<div data-ng-if="global.permissionTypes.student == global.currentSession.currentAccount.permission">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>Quick Add</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div id="quick-register" class="input-group col-sm-4">
+						<input type="text" class="form-control" placeholder="Type course id...">
+						<span class="input-group-btn"><button class="btn btn-primary" type="button">Add</button></span>
+					</div><!-- /input-group -->
+				</div><!--row-->
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>Course Catalog</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Course</th>
+							<th>Day of Week</th>
+							<th>Time</th>
+							<th>Instructor</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="course in vm.courses">
+							<td>{{course.title}}</td>
+							<td><span data-ng-repeat="day in course.days track by $index">{{day}}</span></td>
+							<td><span data-ng-repeat="time in course.time track by $index">{{time}}</span></td>
+							<td>{{course.instructor}}</td>
+							<td><button class="btn btn-primary">Add</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div data-ng-if="global.permissionTypes.admin == global.currentSession.currentAccount.permission">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>Course Catalog</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Course</th>
+							<th>Day of Week</th>
+							<th>Time</th>
+							<th>Instructor</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="course in vm.courses">
+							<td>{{course.title}}</td>
+							<td><span data-ng-repeat="day in course.days track by $index">{{day}}</span></td>
+							<td><span data-ng-repeat="time in course.time track by $index">{{time}}</span></td>
+							<td>{{course.instructor}}</td>
+							<td><button class="btn btn-primary">Edit</button></td>
+							<td><button class="btn btn-danger">Delete</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>
+</div>
+
+

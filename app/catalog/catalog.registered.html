@@ -1,10 +1,10 @@
 <div data-ng-if="global.currentSession.isAuthenticated" >
 	<div class="page-header">
-		<h1>My Schedule</h1>
+		<h1>Drop Courses</h1>
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3>Registered Courses<button data-ng-click="vm.refresh()" class="btn btn-default back-button pull-right">Refresh</button></h3>
+			<h3>Registered Courses<button class="btn btn-default back-button pull-right">Refresh</button></h3>
 		</div>
 		<div class="panel-body">
 			<table class="table table-striped">
@@ -18,7 +18,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr data-ng-repeat="course in vm.schedule">
+					<tr data-ng-repeat="course in vm.registeredCourses">
 						<td>{{course.title}}</td>
 						<td><span data-ng-repeat="day in course.days track by $index">{{day}}</span></td>
 						<td><span data-ng-repeat="time in course.time track by $index">{{time}}</span></td>

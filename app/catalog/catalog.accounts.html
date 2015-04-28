@@ -1,0 +1,35 @@
+<div data-ng-if="global.currentSession.isAuthenticated" >
+	<div class="page-header">
+		<h1>Manage Accounts</h1>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Account Catalog<button class="btn btn-default back-button pull-right">Refresh</button></h3>
+		</div>
+		<div class="panel-body">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Username</th>
+						<th>Type</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="account in vm.accounts">
+						<td>{{account.name}}</td>
+						<td>{{account.username}}</td>
+						<td>{{account.permission}}</td>
+						<td><button class="btn btn-primary">Edit</button></td>
+						<td><button class="btn btn-danger">Delete</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>
+</div>
+
+

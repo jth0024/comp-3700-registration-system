@@ -9,6 +9,7 @@
 
         var service = {
             getCoursesCatalog: getCoursesCatalog,
+            getAccountsCatalog: getAccountsCatalog,
             getSchedule: getSchedule,
             login: login
         };
@@ -54,6 +55,25 @@
             ];
             return courses;
         };
+
+        function getAccountsCatalog() {
+            var requestUrl = 'http://sasbartlett.com/comp3700/lib2/index.php';
+            var message = {
+                request_type: 'get_all_accounts',
+            };
+            message = JSON.stringify(message);
+            
+            return $http({
+                    method: 'POST',
+                    url: requestUrl,
+                    data: "message=" + message,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                .then(function(response) {
+                    console.log(response);
+                    return response.data;
+                });
+        }
 
         function getSchedule(account) {
             //Change code when Sam's url is working

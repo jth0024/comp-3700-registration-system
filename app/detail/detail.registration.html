@@ -1,0 +1,51 @@
+<div data-ng-if="global.currentSession.isAuthenticated" >
+	<div class="page-header">
+		<h1>Registration Details</h1>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>My Account</h3>
+		</div>
+		<div class="panel-body">
+
+
+			<div class="form-group row">
+				<div class="col-sm-4">
+				<label for="name">Name</label>
+				<!--<span class="form-group-addon" id="sizing-addon1">@</span>-->
+				<input readonly type="text" id="name" class="form-control read" value="{{global.currentSession.currentAccount.name}}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-4">
+				<label for="accountid">Username</label>
+				<!--<span class="form-group-addon" id="sizing-addon1">@</span>-->
+				<input readonly type="text" id="accountid" class="form-control read" value="{{global.currentSession.currentAccount.username}}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-4">
+				<label for="status">Registration Status</label>
+				<!--<span class="form-group-addon" id="sizing-addon1">@</span>-->
+				<input readonly type="text" id="status" class="form-control read" value="{{global.currentSession.currentAccount.registrationStatus}}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-4">
+				<label for="holds">Accounts Holds</label>
+				<!--<span class="form-group-addon" id="sizing-addon1">@</span>-->
+				<input readonly type="text" id="holds" class="form-control read" value="{{global.currentSession.currentAccount.holds}}">
+				</div>
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>
+</div>
+
+
+
+
+
+
+
+

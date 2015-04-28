@@ -69,7 +69,7 @@
                 $rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
                     var requireLogin = next.data.requireLogin;
                     var authorizedRoles = next.data.authorizedRoles;
-
+                    console.log(session.isAuthorized(authorizedRoles));
                     if(requireLogin && !session.isAuthorized(authorizedRoles)) {
                         event.preventDefault();
                         if (session.isAuthenticated()) {
@@ -81,6 +81,9 @@
                             $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
                             $state.go('login');
                         }
+                    }
+                    else {
+                        console.log("authorized");
                     }
 
                 });
