@@ -6,15 +6,21 @@
         .controller('Dashboard', Dashboard);
         
 
-    function Dashboard($scope) {
+    function Dashboard($scope, $rootScope, REQUEST_EVENTS) {
         var vm = this;
         activate();
 
         function activate() {
-            /*if($scope.global.currentAccount) {
-              vm.currentAccount = $scope.global.currentSession.currentAccount; 
-            }*/
-            
+            vm.createCourseForm = createCourseForm;
+            vm.createAccountForm = createAccountForm;
+        }
+
+        function createCourseForm() {
+            $rootScope.$broadcast(REQUEST_EVENTS.createCourse);
+        }
+
+        function createAccountForm() {
+            $rootScope.$broadcast(REQUEST_EVENTS.createAccount);
         }
 
     }

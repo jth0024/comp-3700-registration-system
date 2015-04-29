@@ -5,7 +5,7 @@
         /*
          * Angular Modules
          */
-        'ui.router', 'ngSanitize', 'ngAnimate',
+        'ui.router', 'ngSanitize', 'ngAnimate', 'ui.bootstrap'
 
     ]);
 })();

@@ -7,36 +7,69 @@
 			<h3>My Account</h3>
 		</div>
 		<div class="panel-body">
-
-
-			<div class="form-group row">
-				<div class="col-sm-4">
-				<label for="name">Name</label>
-				<!--<span class="form-group-addon" id="sizing-addon1">@</span>-->
-				<input readonly type="text" id="name" class="form-control read" value="{{global.currentSession.currentAccount.name}}">
+			<!--<form class="form-horizontal">
+				<div class="form-group">
+					<label class="control-label col-small-3">Name</label>
+					<div class="col-sm-9">
+						<p class="form-control-static">{{global.currentSession.currentAccount.name}}</p>
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-4">
-				<label for="accountid">Username</label>
-				<!--<span class="form-group-addon" id="sizing-addon1">@</span>-->
-				<input readonly type="text" id="accountid" class="form-control read" value="{{global.currentSession.currentAccount.username}}">
+				<div class="form-group">
+					<label class="control-label col-small-3">Username</label>
+					<div class="col-sm-9">
+						<p class="form-control-static">{{global.currentSession.currentAccount.username}}</p>
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-4">
-				<label for="status">Registration Status</label>
-				<!--<span class="form-group-addon" id="sizing-addon1">@</span>-->
-				<input readonly type="text" id="status" class="form-control read" value="{{global.currentSession.currentAccount.registrationStatus}}">
+				<div class="form-group">
+					<label class="control-label col-small-3">Registration Status</label>
+					<div class="col-sm-9">
+						<p class="form-control-static">{{global.currentSession.currentAccount.registrationStatus}}</p>
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-4">
-				<label for="holds">Accounts Holds</label>
-				<!--<span class="form-group-addon" id="sizing-addon1">@</span>-->
-				<input readonly type="text" id="holds" class="form-control read" value="{{global.currentSession.currentAccount.holds}}">
+				<div class="form-group">
+					<label class="control-label col-small-3">Accounts Holds</label>
+					<div class="col-sm-9">
+						<p class="form-control-static">{{global.currentSession.currentAccount.holds}}</p>
+					</div>
 				</div>
-			</div>
+			</form>-->
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-2 control-label text-left">Account Type</label>
+					<div class="col-sm-10">
+						<p class="form-control-static">{{global.currentSession.currentAccount.permission}}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label text-left">My Name</label>
+					<div class="col-sm-10">
+						<p class="form-control-static">{{global.currentSession.currentAccount.name}}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label text-left">My Username</label>
+					<div class="col-sm-10">
+						<p class="form-control-static">{{global.currentSession.currentAccount.username}}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label text-left">Registration Status</label>
+					<div class="col-sm-10">
+						<p class="form-control-static">{{global.currentSession.currentAccount.registrationStatus}}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label text-left">Account Standing</label>
+					<div class="col-sm-10">
+						<p data-ng-if="global.currentSession.currentAccount.holds == 'true'" class="form-control-static">
+							<span class="label label-danger">Bad</span>
+						</p>
+						<p data-ng-if="global.currentSession.currentAccount.holds == 'false'" class="form-control-static">
+							<span class="label label-success">Good</span>
+						</p>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>

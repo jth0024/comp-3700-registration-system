@@ -2,14 +2,22 @@
 	<div class="page-header">
 		<h1>Welcome, {{ global.currentSession.currentAccount.name }}!</h1>
 	</div>
-	<div data-ng-if="global.permissionTypes.admin == global.currentSession.currentAccount.permission" class="panel panel-default">
-		<div class="panel-heading">
-			<h3>Administrator Resource Links</h3>
-		</div>
-		<div class="panel-body">
+	<div data-ng-if="global.permissionTypes.admin == global.currentSession.currentAccount.permission">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>Administrator Resources</h3>
+			</div>
+			<!--<div class="panel-body row">
+				<div class="col-sm-6 text-center">
+					<button class="btn btn-primary" data-ng-click="vm.createCourseForm()">Create Course</button>
+				</div>
+				<div class="col-sm-6 text-center">
+					<button class="btn btn-primary" data-ng-click="vm.createCourseForm()">Create Course</button>
+				</div>
+			</div>-->
 			<ul class="list-group">
-				<li class="list-group-item"><a ui-sref="#">Create Course</a></li>
-				<li class="list-group-item"><a ui-sref="#">Create Account</a></li>
+				<li class="list-group-item"><a data-ng-click="vm.createCourseForm()" role="button" class="btn btn-primary btn-xs">Create Course</a></li>
+				<li class="list-group-item"><a data-ng-click="vm.createAccountForm()" role="button" class="btn btn-primary btn-xs">Create Account</a></li>
 				<li class="list-group-item"><a ui-sref="app.courses">Manage Courses</a></li>
 				<li class="list-group-item"><a ui-sref="app.accounts">Manage Accounts</a></li>
 			</ul>
@@ -19,24 +27,20 @@
 		<div class="panel-heading" >
 			<h3>Instructor Resource Links</h3>
 		</div>
-		<div class="panel-body">
-			<ul class="list-group">
-				<li class="list-group-item"><a ui-sref="app.schedule">View Schedule</a></li>
-			</ul>
-		</div>
+		<ul class="list-group">
+			<li class="list-group-item"><a ui-sref="app.schedule">View Schedule</a></li>
+		</ul>
 	</div>
 	<div data-ng-if="global.permissionTypes.student == global.currentSession.currentAccount.permission" class="panel panel-default">
 		<div class="panel-heading">
 			<h3>Student Resource Links</h3>
 		</div>
-		<div class="panel-body">
-			<ul class="list-group">
-				<li class="list-group-item"><a ui-sref="app.registration">Registration Details</a></li>
-				<li class="list-group-item"><a ui-sref="app.schedule">My Schedule</a></li>
-				<li class="list-group-item"><a ui-sref="app.courses">Add Courses</a></li>
-				<li class="list-group-item"><a ui-sref="app.registered">Drop Courses</a></li>
-			</ul>
-		</div>
+		<ul class="list-group">
+			<li class="list-group-item"><a ui-sref="app.registration">Registration Details</a></li>
+			<li class="list-group-item"><a ui-sref="app.schedule">My Schedule</a></li>
+			<li class="list-group-item"><a ui-sref="app.courses">Add Courses</a></li>
+			<li class="list-group-item"><a ui-sref="app.registered">Drop Courses</a></li>
+		</ul>
 	</div>
 </div>
 

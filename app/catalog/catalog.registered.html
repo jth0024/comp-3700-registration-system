@@ -4,29 +4,33 @@
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3>Registered Courses<button class="btn btn-default back-button pull-right">Refresh</button></h3>
+			<h3>Registered Courses<button data-ng-click="vm.refresh()" class="btn btn-default back-button pull-right">Refresh</button></h3>
 		</div>
 		<div class="panel-body">
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Course</th>
-						<th>Day of Week</th>
-						<th>Time</th>
+						<th>ID</th>
+						<th>Name</th>
 						<th>Instructor</th>
-						<th>Edit</th>
+						<th>Drop</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr data-ng-repeat="course in vm.registeredCourses">
-						<td>{{course.title}}</td>
-						<td><span data-ng-repeat="day in course.days track by $index">{{day}}</span></td>
-						<td><span data-ng-repeat="time in course.time track by $index">{{time}}</span></td>
+						<td>{{course.id}}</td>
+						<td class="text-uppercase">{{course.name}}</td>
 						<td>{{course.instructor}}</td>
-						<td><button data-ng-click="vm.dropCourse(course.id)" class="btn btn-danger">Drop</button></td>
+						<td>
+							<button data-ng-click="vm.dropCourse(global.currentSession.currentAccount.username, course.id, course.name)" class="btn btn-danger">Drop</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
+			<div class="jumbotron" data-ng-if="vm.numCourses == 0">
+				<h3 class="text-center">Dude, come on...</h3>
+				<p class="text-center">You already dropped all of your courses. How lazy are you?</p>
+			</div>	
 		</div>
 	</div>
 	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>

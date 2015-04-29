@@ -6,6 +6,7 @@
 		'app.layout',
 		'app.login',
 		'app.dashboard',
+		'app.form',
 		'app.detail',
 		'app.catalog',
 		'app.schedule'

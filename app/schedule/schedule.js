@@ -16,6 +16,7 @@
             /*if($scope.global.currentSession.isAuthenticated) {
               vm.schedule = httpservice.getSchedule($scope.global.currentSession.currentAccount);
             }*/
+            console.log(currentSchedule.numCourses);
             vm.schedule = currentSchedule;            
         }
 

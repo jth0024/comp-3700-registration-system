@@ -12,7 +12,19 @@
         activate();
 
         function activate() {
-            vm.accounts = accounts;     
+            vm.accounts = accounts;
+            vm.deleteAccount = deleteAccount;
+            vm.refresh = refresh;
+        }
+
+        function deleteAccount(username) {
+            $rootScope.$broadcast(REQUEST_EVENTS.deleteAccount, {username: username});
+        }
+
+        function refresh() {
+            httpservice.getAccountsCatalog().then(function(response) {
+                vm.accounts = response;
+            });
         }
 
     }

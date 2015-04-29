@@ -7,9 +7,10 @@
 			<h3>Week at a Glance</h3>
 		</div>
 		<div class="panel-body">
-			<table class="table table-striped">
+			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
+						<th>Time</th>
 						<th>Monday</th>
 						<th>Tuesday</th>
 						<th>Wednesday</th>
@@ -17,18 +18,24 @@
 						<th>Friday</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr data-ng-repeat="course in vm.schedule">
-						<td><div data-ng-if="course.days.indexOf('M') !== -1">{{course.title}}</div></td>
-						<td><div data-ng-if="course.days.indexOf('T') !== -1">{{course.title}}</div></td>
-						<td><div data-ng-if="course.days.indexOf('W') !== -1">{{course.title}}</div></td>
-						<td><div data-ng-if="course.days.indexOf('R') !== -1">{{course.title}}</div></td>
-						<td><div data-ng-if="course.days.indexOf('F') !== -1">{{course.title}}</div></td>
+				<tbody >
+					<tr data-ng-if="vm.schedule.numCourses > 0" data-ng-repeat="course in vm.schedule.courseList | orderBy:'startTime'">
+						<td><strong>{{course.startTime}}</strong></td>
+						<td><div class="text-uppercase" data-ng-if="course.day == 'MWF'">{{course.name}}</div></td>
+						<td><div class="text-uppercase" data-ng-if="course.day == 'TR'">{{course.name}}</div></td>
+						<td><div class="text-uppercase" data-ng-if="course.day == 'MWF'">{{course.name}}</div></td>
+						<td><div class="text-uppercase" data-ng-if="course.day == 'TR'">{{course.name}}</div></td>
+						<td><div class="text-uppercase" data-ng-if="course.day == 'MWF'">{{course.name}}</div></td>
 					</tr>
 				</tbody>
 			</table>
+			<div class="jumbotron" data-ng-if="vm.schedule.numCourses == 0">
+				<h3 class="text-center">Hmm...</h3>
+				<p class="text-center">Looks like you've got an empty schedule, Lazy.</p>
+			</div>			
 		</div>
 	</div>
+
 	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>
 </div>
 

@@ -29,16 +29,23 @@
 							<th>Day of Week</th>
 							<th>Time</th>
 							<th>Instructor</th>
-							<th></th>
+							<th>Status</th>
+							<th>Add</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr data-ng-repeat="course in vm.courses">
-							<td>{{course.title}}</td>
-							<td><span data-ng-repeat="day in course.days track by $index">{{day}}</span></td>
-							<td><span data-ng-repeat="time in course.time track by $index">{{time}}</span></td>
+							<td class="text-uppercase">{{course.name}}</td>
+							<td>{{course.day}}</td>
+							<td>{{course.startTime}}</td>
 							<td>{{course.instructor}}</td>
-							<td><button class="btn btn-primary">Add</button></td>
+							<td>
+								<span data-ng-if="course.capacity <= course.numEnrolled" class="label label-danger">closed</span>
+								<span data-ng-if="course.capacity > course.numEnrolled" class="label label-success">open</span>
+							</td>
+							<td>
+								<button data-ng-if="course.capacity > course.numEnrolled" data-ng-click="vm.addToCourse(global.currentSession.currentAccount.username, course.id, course.name)" class="btn btn-primary">Add</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -48,7 +55,7 @@
 	<div data-ng-if="global.permissionTypes.admin == global.currentSession.currentAccount.permission">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3>Course Catalog</h3>
+				<h3>Course Catalog<button data-ng-click="vm.refresh()" class="btn btn-default back-button pull-right">Refresh</button></h3>
 			</div>
 			<div class="panel-body">
 				<table class="table table-hover">
@@ -64,12 +71,12 @@
 					</thead>
 					<tbody>
 						<tr data-ng-repeat="course in vm.courses">
-							<td>{{course.title}}</td>
-							<td><span data-ng-repeat="day in course.days track by $index">{{day}}</span></td>
-							<td><span data-ng-repeat="time in course.time track by $index">{{time}}</span></td>
+							<td class="text-uppercase">{{course.name}}</td>
+							<td>{{course.day}}</td>
+							<td>{{course.startTime}}</td>
 							<td>{{course.instructor}}</td>
 							<td><button class="btn btn-primary">Edit</button></td>
-							<td><button class="btn btn-danger">Delete</button></td>
+							<td><button data-ng-click="vm.deleteCourse(course.id, course.name)" class="btn btn-danger">Delete</button></td>
 						</tr>
 					</tbody>
 				</table>
