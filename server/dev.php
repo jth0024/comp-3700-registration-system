@@ -11,7 +11,7 @@ $data = array('request_type' => 'log_in', 'username' => 'student5', 'password' =
 
 //$data = array('request_type' => 'create_account', 'username' => 'student5', 'password' => 'password', 'permission' => 'student', 'name' => 'Sample Student', 'holds' => 'false', 'registrationStatus' => 'Junior');
 
-$data = array('request_type' => 'create_account', 'username' => 'instructor10', 'password' => 'password', 'permission' => 'instructor', 'name' => 'Sample Instructor');
+//$data = array('request_type' => 'create_account', 'username' => 'admin10', 'password' => 'password', 'permission' => 'admin', 'name' => 'Sample Admin');
 
 //$data = array('request_type' => 'get_all_accounts');
 
@@ -21,15 +21,17 @@ $data = array('request_type' => 'create_account', 'username' => 'instructor10', 
 
 //$data = array('request_type' => 'remove_course', 'courseID' => '2');
 
-//$data = array('request_type' => 'add_student_to_course', 'courseID' => '2', 'username' => "student5");
+//$data = array('request_type' => 'add_student_to_course', 'courseID' => '4', 'username' => "student5");
+
+//$data = array('request_type' => 'remove_student_from_course', 'courseID' => '4', 'username' => "student5");
 
 //$data = array('request_type' => 'add_instructor_to_course', 'courseID' => '4', 'username' => "instructor10");
 
-//$data = array('request_type' => 'get_schedule', 'username' => 'instructor10');
+//$data = array('request_type' => 'get_schedule', 'username' => 'student10');
 
 //$data = array('request_type' => 'delete_account', 'username' => 'instructor10');
 
-$data = array('request_type' => 'get_all_courses');
+//$data = array('request_type' => 'get_all_courses');
 
 if(!$data['request_type']) {
 	echo json_encode(array('error' => array('msg' => 'No Request Type - ' . print_r($data))));

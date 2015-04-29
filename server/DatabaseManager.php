@@ -195,7 +195,7 @@ Class DatabaseManager {
 	}
   
 
-	// Tidy yo shit up
+	// Tidy up
 	public function __destruct() {
 		mysqli_close($this->_con);
 	}

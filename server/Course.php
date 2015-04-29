@@ -42,13 +42,10 @@ Class Course {
 
 	public function removeStudent($student) {
 		$i = 0;
-		echo sizeof($this->roster);
 		foreach ($this->roster as $stu) {
-			echo $stu->getUsername() . " " . $student;
 			if($stu->getUsername() == $student) unset($this->roster[$i]); 
 			$i++;
 		}
-		echo sizeof($this->roster);
 		$this->numEnrolled = sizeof($this->roster);
 	}
 

@@ -124,12 +124,14 @@ Class ServerController {
 		$instructorid = $course->getInstructor()->getUsername();
 		$schedule = $this->db->getSchedule($instructorid);
 		$schedule->removeFromCourseList($courseID);
+		$schedule->setNumCourses(sizeof($schedule->getCourseList()));
 		$this->db->updateSchedule($schedule);
 
 		$roster = $course->getRoster();
 		foreach ($roster as $student) {
 			$schedule = $this->db->getSchedule($student->getUsername());
 			$schedule->removeFromCourseList($courseID);
+			$schedule->setNumCourses(sizeof($schedule->getCourseList()));
 			$this->db->updateSchedule($schedule);
 		}
 
@@ -141,6 +143,7 @@ Class ServerController {
 		$course = $this->db->getCourse($courseID);
 		$course->addStudent($this->db->getAccount($username));
 		$schedule->addToCourseList($course);
+		$schedule->setNumCourses(sizeof($schedule->getCourseList()));
 		$this->db->updateCourse($course);
 		$this->db->updateSchedule($schedule);
 	}
@@ -148,6 +151,11 @@ Class ServerController {
 	public function removeStudentFromCourse($username, $courseID) {
 		$course = $this->db->getCourse($courseID);
 		$course->removeStudent($username);
+		$this->db->updateCourse($course);
+		$schedule = $this->db->getSchedule($username);
+		$schedule->removeFromCourseList($courseID);
+		$schedule->setNumCourses(sizeof($schedule->getCourseList()));
+		$this->db->updateSchedule($schedule);
 	}
 
 	public function addInstructorToCourse($username, $courseID) {
@@ -156,6 +164,7 @@ Class ServerController {
 		$course->setInstructor($instructor);
 		$instructorSchedule = $this->db->getSchedule($instructor->getUsername());
 		$instructorSchedule->addToCourseList($course);
+		$instructorSchedule->setNumCourses(sizeof($instructorSchedule->getCourseList()));
 		$this->db->updateCourse($course);
 		$this->db->updateSchedule($instructorSchedule);
 
@@ -168,12 +177,18 @@ Class ServerController {
 		$course->setInstructor($account);
 		$instructorSchedule = $this->db->getSchedule($instructor->getUsername());
 		$instructorSchedule->removeFromCourseList($courseID);
+		$instructorSchedule->setNumCourses(sizeof($instructorSchedule->getCourseList()));
 		$this->db->updateCourse($course);
 		$this->db->updateSchedule($instructorSchedule);
 	}
 
 	public function getSchedule($username) {
-		return json_encode($this->db->getSchedule($username)->toArray(), true);
+		$schedule = $this->db->getSchedule($username);
+		$courses = $schedule->getCourseList();
+		$realCourses = array();
+		foreach ($courses as $course) $realCourses[] = $course->toArray();
+		return json_encode(array('username' => $schedule->getUsername(), 'courseList' => $realCourses, 
+			'numCourses' => $schedule->getNumCourses(), 'maxNumCourses' => $schedule->getMaxNumCourses()), true);
 	}
 
 	public function getAllCourses() {
