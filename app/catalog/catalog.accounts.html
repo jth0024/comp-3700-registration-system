@@ -6,28 +6,26 @@
 		<div class="panel-heading">
 			<h3>Account Catalog<button data-ng-click="vm.refresh()" class="btn btn-default back-button pull-right">Refresh</button></h3>
 		</div>
-		<div class="panel-body">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Username</th>
-						<th>Type</th>
-						<th>Edit</th>
-						<th>Delete</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr data-ng-repeat="account in vm.accounts">
-						<td>{{account.name}}</td>
-						<td>{{account.username}}</td>
-						<td>{{account.permission}}</td>
-						<td><button class="btn btn-primary">Edit</button></td>
-						<td><button data-ng-click="vm.deleteAccount(account.username)" class="btn btn-danger">Delete</button></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<table class="table table-striped no-margin-bottom">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Username</th>
+					<th>Type</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="account in vm.accounts">
+					<td>{{account.name}}</td>
+					<td>{{account.username}}</td>
+					<td>{{account.permission}}</td>
+					<td><button data-ng-click="vm.editAccount(account.username)" class="btn btn-primary">Edit</button></td>
+					<td><button data-ng-click="vm.deleteAccount(account.username)" class="btn btn-danger">Delete</button></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>
 </div>

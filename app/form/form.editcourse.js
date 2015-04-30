@@ -3,15 +3,16 @@
 
     angular
         .module('app.form')
-        .controller('CreateCourse', CreateCourse);
+        .controller('EditCourse', EditCourse);
         
 
-    function CreateCourse($scope, $modalInstance, toastr, accounts, PERMISSION_TYPES, COURSE_DEFAULTS) {
+    function EditCourse($scope, $modalInstance, accounts, courses, course, PERMISSION_TYPES, COURSE_DEFAULTS) {
         var vm = this;
         activate();
 
         function activate() {
-            vm.course = {};
+            vm.course = course;
+            vm.courses = courses;
             vm.submit = submit;
             vm.cancel = cancel;
             vm.instructors = [];
@@ -24,22 +25,10 @@
                     vm.instructors.push(accounts[i]);
                 }
             }
-
-            vm.course.instructor = vm.instructors[0].username;
-            vm.course.startTime = COURSE_DEFAULTS.times[0];
-            vm.course.capacity = COURSE_DEFAULTS.capacities[0];
-            vm.course.day = COURSE_DEFAULTS.days[0];
-
-            console.log(vm.instructors);
         }
 
         function submit() {
-            if (!!!vm.course.name || vm.course.name.length == 0) {
-                toastr.error("Error: Must enter a course name");       
-            }
-            else {
-                $modalInstance.close(vm.course);    
-            }
+            $modalInstance.close(vm.course);
         }
 
         function cancel() {

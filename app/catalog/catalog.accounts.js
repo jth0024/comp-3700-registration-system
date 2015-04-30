@@ -14,11 +14,16 @@
         function activate() {
             vm.accounts = accounts;
             vm.deleteAccount = deleteAccount;
+            vm.editAccount = editAccount;
             vm.refresh = refresh;
         }
 
         function deleteAccount(username) {
             $rootScope.$broadcast(REQUEST_EVENTS.deleteAccount, {username: username});
+        }
+
+        function editAccount(username) {
+            $rootScope.$broadcast(REQUEST_EVENTS.editAccount, {username: username});
         }
 
         function refresh() {

@@ -25,7 +25,6 @@
 
             var service = {
                 setRoutes: setRoutes,
-                //getRoutes: getRoutes,
                 go: go
             };
 
@@ -93,8 +92,6 @@
                 handleRoutingErrors();
                 handleStateChange();
             }
-
-            //function getRoutes() { return $state.get(); }
 
         }
     }

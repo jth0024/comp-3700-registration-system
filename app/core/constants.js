@@ -21,10 +21,13 @@
         .constant('REQUEST_EVENTS', {
             dropCourse: 'request-drop-course',
             addToCourse: 'request-add-to-course',
+            goToCourseCatalog: 'request-go-to-course-catalog',
             createCourse: 'request-create-course',
+            editCourse: 'request-edit-course',
             removeCourse: 'request-remove-course',
             createAccount: 'request-create-account',
-            deleteAccount: 'request-delete-account'
+            deleteAccount: 'request-delete-account',
+            editAccount: 'request-edit-account'
         })
         .constant('COURSE_DEFAULTS', {
             times: [
@@ -43,7 +46,13 @@
             capacities: [
             '5',
             '10',
+            '15',
+            '20',
             '25',
+            '30',
+            '35',
+            '40',
+            '45',
             '50',
             '75',
             '100',

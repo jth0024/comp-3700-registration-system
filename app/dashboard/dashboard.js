@@ -13,6 +13,7 @@
         function activate() {
             vm.createCourseForm = createCourseForm;
             vm.createAccountForm = createAccountForm;
+            vm.goToCourseCatalog = goToCourseCatalog;
         }
 
         function createCourseForm() {
@@ -21,6 +22,10 @@
 
         function createAccountForm() {
             $rootScope.$broadcast(REQUEST_EVENTS.createAccount);
+        }
+
+        function goToCourseCatalog(studentID) {
+            $rootScope.$broadcast(REQUEST_EVENTS.goToCourseCatalog);
         }
 
     }

@@ -11,8 +11,8 @@
 			<div class="panel-body">
 				<div class="row">
 					<div id="quick-register" class="input-group col-sm-4">
-						<input type="text" class="form-control" placeholder="Type course id...">
-						<span class="input-group-btn"><button class="btn btn-primary" type="button">Add</button></span>
+						<input type="text" class="form-control" data-ng-model="vm.quickID" placeholder="Type course id...">
+						<span class="input-group-btn"><button class="btn btn-primary"  data-ng-click="vm.quickAddToCourse(global.currentSession.currentAccount.username, vm.quickID)" type="button">Add</button></span>
 					</div><!-- /input-group -->
 				</div><!--row-->
 			</div>
@@ -21,35 +21,35 @@
 			<div class="panel-heading">
 				<h3>Course Catalog</h3>
 			</div>
-			<div class="panel-body">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Course</th>
-							<th>Day of Week</th>
-							<th>Time</th>
-							<th>Instructor</th>
-							<th>Status</th>
-							<th>Add</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr data-ng-repeat="course in vm.courses">
-							<td class="text-uppercase">{{course.name}}</td>
-							<td>{{course.day}}</td>
-							<td>{{course.startTime}}</td>
-							<td>{{course.instructor}}</td>
-							<td>
-								<span data-ng-if="course.capacity <= course.numEnrolled" class="label label-danger">closed</span>
-								<span data-ng-if="course.capacity > course.numEnrolled" class="label label-success">open</span>
-							</td>
-							<td>
-								<button data-ng-if="course.capacity > course.numEnrolled" data-ng-click="vm.addToCourse(global.currentSession.currentAccount.username, course.id, course.name)" class="btn btn-primary">Add</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<table class="table table-hover no-margin-bottom">
+				<thead>
+					<tr>
+						<th>Course ID</th>
+						<th>Course</th>
+						<th>Day of Week</th>
+						<th>Time</th>
+						<th>Instructor</th>
+						<th>Status</th>
+						<th>Add</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="course in vm.courses">
+						<td>{{course.id}}</td>
+						<td class="text-uppercase">{{course.name}}</td>
+						<td>{{course.day}}</td>
+						<td>{{course.startTime}}</td>
+						<td>{{course.instructor}}</td>
+						<td>
+							<span data-ng-if="course.capacity <= course.numEnrolled" class="label label-danger">closed</span>
+							<span data-ng-if="course.capacity > course.numEnrolled" class="label label-success">open</span>
+						</td>
+						<td>
+							<button data-ng-if="course.capacity > course.numEnrolled" data-ng-click="vm.addToCourse(global.currentSession.currentAccount.username, course.id, course.name)" class="btn btn-primary">Add</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div data-ng-if="global.permissionTypes.admin == global.currentSession.currentAccount.permission">
@@ -57,30 +57,28 @@
 			<div class="panel-heading">
 				<h3>Course Catalog<button data-ng-click="vm.refresh()" class="btn btn-default back-button pull-right">Refresh</button></h3>
 			</div>
-			<div class="panel-body">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Course</th>
-							<th>Day of Week</th>
-							<th>Time</th>
-							<th>Instructor</th>
-							<th>Edit</th>
-							<th>Delete</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr data-ng-repeat="course in vm.courses">
-							<td class="text-uppercase">{{course.name}}</td>
-							<td>{{course.day}}</td>
-							<td>{{course.startTime}}</td>
-							<td>{{course.instructor}}</td>
-							<td><button class="btn btn-primary">Edit</button></td>
-							<td><button data-ng-click="vm.deleteCourse(course.id, course.name)" class="btn btn-danger">Delete</button></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<table class="table table-hover no-margin-bottom">
+				<thead>
+					<tr>
+						<th>Course</th>
+						<th>Day of Week</th>
+						<th>Time</th>
+						<th>Instructor</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="course in vm.courses">
+						<td class="text-uppercase">{{course.name}}</td>
+						<td>{{course.day}}</td>
+						<td>{{course.startTime}}</td>
+						<td>{{course.instructor}}</td>
+						<td><button data-ng-click="vm.editCourse(course.id, course.name)"  class="btn btn-primary">Edit</button></td>
+						<td><button data-ng-click="vm.deleteCourse(course.id, course.name)" class="btn btn-danger">Delete</button></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>

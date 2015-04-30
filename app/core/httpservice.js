@@ -11,12 +11,16 @@
             getCoursesCatalog: getCoursesCatalog,
             createCourse: createCourse,
             removeCourse: removeCourse,
+            updateCourse: updateCourse,
+            getCourse: getCourse,
             getAccountsCatalog: getAccountsCatalog,
             createAccount: createAccount,
+            updateAccount: updateAccount,
+            deleteAccount: deleteAccount,
+            getAccount: getAccount,
             getSchedule: getSchedule,
             addStudentToCourse: addStudentToCourse,
             removeStudentFromCourse: removeStudentFromCourse,
-            deleteAccount: deleteAccount,
             login: login
         };
 
@@ -64,6 +68,14 @@
             return serverRequest(message);
         };
 
+        function getCourse(ID) {
+            var message = {
+                request_type: 'get_course',
+                courseID: ID
+            };
+            return serverRequest(message);
+        }     
+
         function createCourse(course) {
             var message = {
                 request_type: 'create_course',
@@ -74,6 +86,21 @@
                 startTime: course.startTime,
                 roster: []
             };
+            return serverRequest(message);
+        };
+
+        function updateCourse(course) {
+            var message = {
+                request_type: 'update_course',
+                courseID: course.courseID,
+                name: course.name,
+                instructor: course.instructor,
+                capacity: course.capacity,
+                day: course.day,
+                startTime: course.startTime,
+                roster: course.roster
+            };
+            console.log(message);
             return serverRequest(message);
         };
 
@@ -93,27 +120,36 @@
         }
 
         function createAccount(account) {
-            var message;
-            if (account.permission == PERMISSION_TYPES.student) {
-                message = {
-                    request_type: 'create_account',
-                    name: account.name,
-                    username: account.username,
-                    password: account.password,
-                    permission: account.permission,
-                    holds: account.holds,
-                    registrationStatus: account.registrationStatus
-                };
-            }
-            else {
-                message = {
-                    request_type: 'create_account',
-                    name: account.name,
-                    password: account.password,
-                    username: account.username,
-                    permission: account.permission
-                };
-            }
+            var message = {
+                request_type: 'create_account',
+                name: account.name,
+                username: account.username,
+                password: account.password,
+                permission: account.permission,
+                holds: account.holds,
+                registrationStatus: account.registrationStatus
+            };
+            return serverRequest(message);
+        };
+
+        function getAccount(username) {
+            var message = {
+                request_type: 'get_account',
+                username: username,
+            };
+            return serverRequest(message);
+        }
+
+        function updateAccount(account) {
+            var message = {
+                request_type: 'update_account',
+                name: account.name,
+                username: account.username,
+                password: account.password,
+                permission: account.permission,
+                holds: account.holds,
+                registrationStatus: account.registrationStatus
+            };
             return serverRequest(message);
         };
 

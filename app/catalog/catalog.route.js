@@ -3,25 +3,7 @@
 
     angular
         .module('app.catalog')
-        //.config(configure);
         .run(appRun);
-
-    /*function configure($stateProvider, $urlRouterProvider, PERMISSION_TYPES) {
-
-        $stateProvider
-            .state('app.catalog', {
-                url: '/dashboard/catalog',
-                templateUrl: 'app/catalog/catalog.html',
-                controller: 'Catalog',
-                controllerAs: 'vm',
-                title: 'catalog',
-                data: {
-                    //requireLogin: true,
-                    authorizedRoles: [PERMISSION_TYPES.admin, PERMISSION_TYPES.instructor, PERMISSION_TYPES.student]
-                }
-            });
-    }*/
-
 
     function appRun(routerHelper, PERMISSION_TYPES, httpservice, session) {
         routerHelper.setRoutes([
@@ -48,7 +30,7 @@
                 state: 'app.registered',
                 config: {
                     resolve: {
-                        registeredCourses:  function(httpservice){
+                        schedule:  function(httpservice){
                             // $http returns a promise for the url data
                             return httpservice.getSchedule(session.currentAccount.username);
                         }
@@ -60,6 +42,25 @@
                     title: 'registered',
                     data: {
                         authorizedRoles: [PERMISSION_TYPES.student]
+                    }              
+                }
+            },
+            {
+                state: 'app.assigned',
+                config: {
+                    resolve: {
+                        schedule:  function(httpservice){
+                            // $http returns a promise for the url data
+                            return httpservice.getSchedule(session.currentAccount.username);
+                        }
+                    },
+                    url: '/dashboard/catalog/assigned',
+                    templateUrl: 'app/catalog/catalog.assigned.html',
+                    controller: 'Assigned',
+                    controllerAs: 'vm',
+                    title: 'assigned',
+                    data: {
+                        authorizedRoles: [PERMISSION_TYPES.instructor]
                     }              
                 }
             },

@@ -6,7 +6,7 @@
         .controller('Registered', Registered);
         
 
-    function Registered($rootScope, $scope, httpservice, REQUEST_EVENTS, registeredCourses) {
+    function Registered($rootScope, $scope, httpservice, REQUEST_EVENTS, schedule) {
         var vm = this;
         vm.dropCourse = dropCourse;
         vm.refresh = refresh;
@@ -14,10 +14,9 @@
 
         activate();
 
-        function activate() {
-            //vm.schedule = httpservice.getSchedule($scope.global.currentSession.currentAccount.accountID);   
-            vm.registeredCourses = registeredCourses.courseList;  
-            vm.numCourses = registeredCourses.numCourses;     
+        function activate() { 
+            vm.registeredCourses = schedule.courseList;  
+            vm.numCourses = schedule.numCourses;     
         }
 
         function dropCourse(username, courseID, name) {
@@ -25,9 +24,9 @@
         }
 
         function refresh() {
-            httpservice.getSchedule($scope.global.currentSession.currentAccount.username).then(function(response) {
-                vm.registeredCourses = response.courseList;
-                vm.numCourses = response.numCourses;
+            httpservice.getSchedule($scope.global.currentSession.currentAccount.username).then(function(schedule) {
+                vm.registeredCourses = schedule.courseList;
+                vm.numCourses = schedule.numCourses;
             });
         }
 

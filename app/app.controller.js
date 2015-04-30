@@ -18,7 +18,7 @@
 			httpservice.login(args).then(function (response) {
 				if(!!!response.error) {
 					vm.currentSession.authenticate(response);
-					toastr.success('Successfully logged in ' + response.username + '.');
+					toastr.info('Welcome back ' + response.username + '!');
 					routerHelper.go('app.dashboard');
 				}
 				else {
@@ -62,6 +62,15 @@
 			});
 		});
 
+		$rootScope.$on(REQUEST_EVENTS.goToCourseCatalog, function(event) {
+			if(vm.currentSession.currentAccount.holds == "true") {
+				toastr.error('Error: Account has holds');
+			}
+			else {
+				$state.go('app.courses');
+			}
+		});
+
 		////////ADD TO COURSE////////
 		$rootScope.$on(REQUEST_EVENTS.addToCourse, function(event, args) {
 			httpservice.addStudentToCourse(args.username, args.courseID).then(function (response) {
@@ -93,7 +102,43 @@
             createCourseInstance.result.then(function (course) {
 				httpservice.createCourse(course).then(function (response) {
 					if (!!!response.error) {
-						toastr.info('Created new course: ' + course.name);
+						toastr.info(course.name + ' has been updated.');
+					}
+					else {
+						toastr.error('Error: ' + response.error.msg);
+					}
+				}, function() {
+					$rootScope.$broadcast(AUTH_EVENTS.unkownError);
+				});
+            }, function () {
+              console.log('Modal dismissed at: ' + new Date());
+            });
+		});
+
+		////////EDIT COURSE////////
+		$rootScope.$on(REQUEST_EVENTS.editCourse, function(event, args) {
+			var createCourseInstance = $modal.open({
+				templateUrl: 'app/form/form.editcourse.html',
+				controller: 'EditCourse',
+				controllerAs: 'vm',
+                resolve: {
+                    accounts:  function(httpservice){
+                        // $http returns a promise for the url data
+                        return httpservice.getAccountsCatalog();
+                    },
+                    courses: function(httpservice) {
+                    	return httpservice.getCoursesCatalog();
+                    },
+                    course: function(httpservice) {
+                    	return httpservice.getCourse(args.courseID);
+                    }
+                }
+			});
+
+            createCourseInstance.result.then(function (course) {
+				httpservice.updateCourse(course).then(function (response) {
+					if (!!!response.error) {
+						toastr.info(course.name + ' has been updated.');
 					}
 					else {
 						toastr.error('Error: ' + response.error.msg);
@@ -139,6 +184,42 @@
 				httpservice.createAccount(account).then(function (response) {
 					if (!!!response.error) {
 						toastr.info('Created new account: ' + account.name);
+					}
+					else {
+						toastr.error('Error: ' + response.error.msg);
+					}
+				}, function() {
+					$rootScope.$broadcast(AUTH_EVENTS.unkownError);
+				});
+            }, function () {
+              console.log('Modal dismissed at: ' + new Date());
+            });
+		});
+
+		////////UPDATE ACCOUNT////////
+		$rootScope.$on(REQUEST_EVENTS.editAccount, function(event, args) {
+			var createAccountInstance = $modal.open({
+				templateUrl: 'app/form/form.editaccount.html',
+				controller: 'EditAccount',
+				controllerAs: 'vm',
+                resolve: {
+                    accounts:  function(httpservice){
+                        // $http returns a promise for the url data
+                        return httpservice.getAccountsCatalog();
+                    },
+                    account: function(httpservice) {
+                    	return httpservice.getAccount(args.username)
+                    }
+                }
+			});
+
+            createAccountInstance.result.then(function (account) {
+				httpservice.updateAccount(account).then(function (response) {
+					if (!!!response.error) {
+						if (account.username == vm.currentSession.currentAccount.username) {
+							vm.currentSession.authenticate(account);
+						}
+						toastr.info(account.name + ' has been updated.');
 					}
 					else {
 						toastr.error('Error: ' + response.error.msg);

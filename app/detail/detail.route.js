@@ -19,7 +19,26 @@
                         authorizedRoles: [PERMISSION_TYPES.admin, PERMISSION_TYPES.student]
                     }              
                 }
-            }
+            },
+            {
+                state: 'app.course',
+                config: {
+                    resolve: {
+                        course:  function(httpservice, $stateParams){
+                            // $http returns a promise for the url data
+                            return httpservice.getCourse($stateParams.courseID);
+                        }
+                    },
+                    url: '/dashboard/details/course/:courseID',
+                    templateUrl: 'app/detail/detail.course.html',
+                    controller: 'Course',
+                    controllerAs: 'vm',
+                    title: 'course',
+                    data: {
+                        authorizedRoles: [PERMISSION_TYPES.instructor]
+                    }              
+                }
+            },
         ]); 
     }
 
