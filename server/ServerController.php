@@ -105,7 +105,7 @@ Class ServerController {
 		$numEnrolled = 0;
 		$roster = array();
 		foreach($params['roster'] as $student) $roster[] = $this->db->getAccount($student);
-		$course = new Course(array('instructor' => $instructor, 'name' => $name, 'day' => $day, 'startTime' => $startTime, 'capacity' => $capacity, 'numEnrolled' => $numEnrolled, 'roster' => $roster));
+		$course = new Course(array('instructor' => $instructor, 'name' => $name, 'day' => $day, 'startTime' => $startTime, 'capacity' => $capacity, 'numEnrolled' => $numEnrolled, 'roster' => array()));
 		$this->db->insertCourse($course);
 		$courses = $this->db->getAllCourses();
 		$courseID = "";
@@ -116,6 +116,9 @@ Class ServerController {
 		$schedule = $this->db->getSchedule($instructor->getUsername());
 		$schedule->addToCourseList($this->db->getCourse($courseID));
 		$this->db->updateSchedule($schedule);
+		foreach($roster as $student) {
+			$this->addStudentToCourse($student->$username, $courseID);
+		}
 	}
 
 	public function deleteCourse($courseID) {
@@ -193,6 +196,19 @@ Class ServerController {
 
 	public function getAllCourses() {
 		return json_encode($this->db->getAllCourses(), true);
+	}
+
+	public function getCourse($courseID) {
+		return json_encode($this->db->getCourse($courseID)->toArray(), true);
+	}
+
+	public function getAccount($username) {
+		return json_encode($this->db->getAccount($username)->toArray(), true);
+	}
+
+	public function updateCourse($params) {
+		$this->deleteCourse($params['courseID']);
+		$this->createCourse($params);
 	}
 
 }

@@ -58,6 +58,16 @@ switch($data['request_type']) {
 	case "get_all_courses":
 		echo $server_controller->getAllCourses();
 	break;
+	case "get_course":
+		echo $server_controller->getCourse($data['courseID']);
+	break;
+	case "get_account":
+		echo $server_controller->getAccount($data['username']);
+	break;
+	case "update_course":
+		unset($data['request_type']);
+		echo $server_controller->updateAccount($data);
+	break;
 	default: 
 		echo json_encode(array('error' => array('msg' => 'Incorrect or Unfound Request Type - ' . $data['request_type'])));
 	break;
