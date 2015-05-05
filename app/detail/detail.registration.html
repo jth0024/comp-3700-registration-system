@@ -6,7 +6,30 @@
 		<div class="panel-heading">
 			<h3>My Account</h3>
 		</div>
-		<div class="panel-body">
+		<div class="list-group">
+			<li class="list-group-item">
+				<strong><p>Account Type</p></strong>
+				<p>{{global.currentSession.currentAccount.permission}}</p>
+			</li>
+			<li class="list-group-item">
+				<strong><p>My Name</p></strong>
+				<p>{{global.currentSession.currentAccount.name}}</p>
+			</li>
+			<li class="list-group-item">
+				<strong><p>Username</p></strong>
+				<p>{{global.currentSession.currentAccount.username}}</p>
+			</li>
+			<li class="list-group-item">
+				<strong><p>Registration</p></strong>
+				<p>{{global.currentSession.currentAccount.registrationStatus}}</p>
+			</li>
+			<li class="list-group-item">
+				<strong><p>Standing</p></strong>
+				<p data-ng-if="global.currentSession.currentAccount.holds == 'true'" ><span class="label label-danger">Bad</span></p>
+				<p data-ng-if="global.currentSession.currentAccount.holds == 'false'" ><span class="label label-success">Good</span></p>
+			</li>
+		</div>
+		<!--<div class="panel-body">
 			<form class="form-horizontal">
 				<div class="form-group">
 					<label class="col-sm-2 control-label text-left">Account Type</label>
@@ -44,7 +67,7 @@
 					</div>
 				</div>
 			</form>
-		</div>
+		</div>-->
 	</div>
 	<button class="btn btn-default back-button" ui-sref="app.dashboard">Go Back</button>
 </div>

@@ -18,9 +18,13 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li data-ng-if="global.currentSession.authenticated">
-          <button class="btn btn-default username-button" ui-sref="app.dashboard">Home</button>
+          <button class="btn btn-default btn-sm username-button" ui-sref="app.dashboard">Home</button>
+          <!--<a ui-sref="app.dashboard" class="navbar-link">Home</a>-->
         </li>
-        <li data-ng-if="global.currentSession.authenticated"><button data-ng-click="vm.logout()" class="btn btn-danger">Logout</button></li>
+        <li data-ng-if="global.currentSession.authenticated">
+          <button data-ng-click="vm.logout()" class="btn btn-default btn-sm">Logout</button>
+          <!--<a data-ng-click="vm.logout()" class="navbar-link">Logout</a>-->
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

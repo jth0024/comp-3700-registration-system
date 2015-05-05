@@ -92,7 +92,7 @@
         function updateCourse(course) {
             var message = {
                 request_type: 'update_course',
-                courseID: course.courseID,
+                courseID: course.id,
                 name: course.name,
                 instructor: course.instructor,
                 capacity: course.capacity,

@@ -11,9 +11,12 @@
                 state: 'app.courses',
                 config: {
                     resolve: {
-                        courses:  function(httpservice){
+                        courses:  function(httpservice) {
                             // $http returns a promise for the url data
                             return httpservice.getCoursesCatalog();
+                        },
+                        schedule: function(httpservice) {
+                            return httpservice.getSchedule(session.currentAccount.username);
                         }
                     },
                     url: '/dashboard/catalog/courses',
