@@ -11,7 +11,7 @@
                 state: 'app.registration',
                 config: {
                     url: '/dashboard/details/registration',
-                    templateUrl: 'app/detail/detail.registration.html',
+                    templateUrl: 'client/detail/detail.registration.html',
                     //controller: 'Registration',
                     //controllerAs: 'vm',
                     title: 'registration',
@@ -30,7 +30,7 @@
                         }
                     },
                     url: '/dashboard/details/course/:courseID',
-                    templateUrl: 'app/detail/detail.course.html',
+                    templateUrl: 'client/detail/detail.course.html',
                     controller: 'Course',
                     controllerAs: 'vm',
                     title: 'course',

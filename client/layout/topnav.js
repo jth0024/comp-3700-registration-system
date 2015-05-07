@@ -20,8 +20,6 @@
 
 
         function logout() {
-            //httpservice.logout();
-            //$scope.global.setCurrentAccount(null);
             $rootScope.$broadcast(AUTH_EVENTS.logoutRequest);
         }
 

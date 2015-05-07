@@ -17,7 +17,7 @@
                         }
                     },
                     url: '/dashboard/schedule',
-                    templateUrl: 'app/schedule/schedule.html',
+                    templateUrl: 'client/schedule/schedule.html',
                     controller: 'Schedule',
                     controllerAs: 'vm',
                     title: 'schedule',

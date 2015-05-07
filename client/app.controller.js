@@ -88,7 +88,7 @@
 		////////CREATE COURSE////////
 		$rootScope.$on(REQUEST_EVENTS.createCourse, function() {
 			var createCourseInstance = $modal.open({
-				templateUrl: 'app/form/form.createcourse.html',
+				templateUrl: 'client/form/form.createcourse.html',
 				controller: 'CreateCourse',
 				controllerAs: 'vm',
                 resolve: {
@@ -102,7 +102,7 @@
             createCourseInstance.result.then(function (course) {
 				httpservice.createCourse(course).then(function (response) {
 					if (!!!response.error) {
-						toastr.info(course.name + ' has been updated.');
+						toastr.info(course.name + ' has been created.');
 					}
 					else {
 						toastr.error('Error: ' + response.error.msg);
@@ -118,7 +118,7 @@
 		////////EDIT COURSE////////
 		$rootScope.$on(REQUEST_EVENTS.editCourse, function(event, args) {
 			var createCourseInstance = $modal.open({
-				templateUrl: 'app/form/form.editcourse.html',
+				templateUrl: 'client/form/form.editcourse.html',
 				controller: 'EditCourse',
 				controllerAs: 'vm',
                 resolve: {
@@ -168,7 +168,7 @@
 		////////CREATE ACCOUNT////////
 		$rootScope.$on(REQUEST_EVENTS.createAccount, function() {
 			var createAccountInstance = $modal.open({
-				templateUrl: 'app/form/form.createaccount.html',
+				templateUrl: 'client/form/form.createaccount.html',
 				controller: 'CreateAccount',
 				controllerAs: 'vm',
                 resolve: {
@@ -199,7 +199,7 @@
 		////////UPDATE ACCOUNT////////
 		$rootScope.$on(REQUEST_EVENTS.editAccount, function(event, args) {
 			var createAccountInstance = $modal.open({
-				templateUrl: 'app/form/form.editaccount.html',
+				templateUrl: 'client/form/form.editaccount.html',
 				controller: 'EditAccount',
 				controllerAs: 'vm',
                 resolve: {

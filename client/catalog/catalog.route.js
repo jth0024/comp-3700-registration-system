@@ -20,7 +20,7 @@
                         }
                     },
                     url: '/dashboard/catalog/courses',
-                    templateUrl: 'app/catalog/catalog.courses.html',
+                    templateUrl: 'client/catalog/catalog.courses.html',
                     controller: 'Courses',
                     controllerAs: 'vm',
                     title: 'courses',
@@ -39,7 +39,7 @@
                         }
                     },
                     url: '/dashboard/catalog/registered',
-                    templateUrl: 'app/catalog/catalog.registered.html',
+                    templateUrl: 'client/catalog/catalog.registered.html',
                     controller: 'Registered',
                     controllerAs: 'vm',
                     title: 'registered',
@@ -58,7 +58,7 @@
                         }
                     },
                     url: '/dashboard/catalog/assigned',
-                    templateUrl: 'app/catalog/catalog.assigned.html',
+                    templateUrl: 'client/catalog/catalog.assigned.html',
                     controller: 'Assigned',
                     controllerAs: 'vm',
                     title: 'assigned',
@@ -77,7 +77,7 @@
                         }
                     },
                     url: '/dashboard/catalog/accounts',
-                    templateUrl: 'app/catalog/catalog.accounts.html',
+                    templateUrl: 'client/catalog/catalog.accounts.html',
                     controller: 'Accounts',
                     controllerAs: 'vm',
                     title: 'accounts',
