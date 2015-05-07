@@ -66,7 +66,7 @@ switch($data['request_type']) {
 	break;
 	case "update_course":
 		unset($data['request_type']);
-		echo $server_controller->updateAccount($data);
+		echo $server_controller->updateCourse($data);
 	break;
 	default: 
 		echo json_encode(array('error' => array('msg' => 'Incorrect or Unfound Request Type - ' . $data['request_type'])));
